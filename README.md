@@ -1,6 +1,6 @@
-# ICT BMC — Corporate Website
+# ICT Banteay Meanchey — Corporate Website
 
-Frontend-only corporate website for ICT BMC, built with Next.js 16 (App Router, Cache Components), TypeScript and Tailwind CSS v4. There is no backend, API, database or authentication. All content lives in static TypeScript data files.
+Frontend-only corporate website for ICT Banteay Meanchey, built with Next.js 16 (App Router, Cache Components), TypeScript and Tailwind CSS v4. There is no backend, API, database or authentication. All content lives in static TypeScript data files.
 
 ## Getting started
 
@@ -17,7 +17,7 @@ npm run lint
 | --- | --- |
 | Production URL (used for canonical URLs, sitemap, robots, Open Graph) | `NEXT_PUBLIC_SITE_URL` env var, e.g. `https://www.example.com` |
 | Email, phone, WhatsApp, address, hours | `data/company.ts` → `contact` |
-| Office map pin (latitude/longitude, plus code) | `data/company.ts` → `officeLocation` |
+| Office map pin (latitude/longitude) | `data/company.ts` → `officeLocation` |
 | Social media links | `data/company.ts` → `socialLinks` |
 | Contact form behaviour | `data/company.ts` → `contactFormConfig` |
 
@@ -29,9 +29,9 @@ By default the form runs in **demo mode**. It validates in the browser and shows
 
 ## Languages (English / Khmer)
 
-Every page is available in English at `/en/...` and Khmer at `/kh/...`. The `<html lang>` and hreflang value for Khmer is `km`, the ISO language code.
+Every page is available in Khmer at `/kh/...` (the default) and English at `/en/...`. The `<html lang>` and hreflang value for Khmer is `km`, the ISO language code.
 
-- `proxy.ts` redirects `/` (and any path without a locale) using the `NEXT_LOCALE` cookie, then the browser's `Accept-Language`, then English.
+- `proxy.ts` redirects `/` (and any path without a locale) to Khmer, unless the visitor chose English with the switcher (`NEXT_LOCALE` cookie). The browser language is ignored. The default is set by `defaultLocale` in `lib/i18n/config.ts`.
 - The EN / KH switch in the navbar keeps the current page and remembers the choice in that cookie.
 - **UI strings:** `lib/i18n/dictionaries/en.ts` and `kh.ts`. The Khmer file is type-checked against the English keys, so a missing key fails the build.
 - **Content:** English stays in `data/*.ts`. Khmer translations live in `data/kh/*.ts`, keyed by slug or list order, and `lib/i18n/content.ts` merges them. A missing Khmer entry falls back to English.

@@ -4,15 +4,15 @@
  */
 const en = {
   meta: {
-    siteTitle: "ICT BMC — Software Development & IT Consulting",
+    siteTitle: "ICT Banteay Meanchey — Software Development & IT Consulting",
     siteDescription:
-      "ICT BMC, based in Banteay Meanchey Province, delivers custom software development, business management systems, IT consulting, IT infrastructure and technical support to help businesses across Cambodia grow with confidence.",
-    homeTitle: "ICT BMC — Software Development & IT Consulting in Banteay Meanchey, Cambodia",
+      "ICT Banteay Meanchey delivers custom software development, business management systems, IT consulting, IT infrastructure and technical support from Banteay Meanchey Province, helping businesses across Cambodia grow with confidence.",
+    homeTitle: "ICT Banteay Meanchey — Software Development & IT Consulting in Cambodia",
     homeDescription:
-      "ICT BMC, a technology company in Banteay Meanchey Province, designs, develops and delivers custom software, business management systems, IT consulting, infrastructure and support that help businesses grow with confidence.",
+      "ICT Banteay Meanchey is a technology company that designs, develops and delivers custom software, business management systems, IT consulting, infrastructure and support that help businesses grow with confidence.",
     aboutTitle: "About Us",
     aboutDescription:
-      "Learn about ICT BMC — a technology solutions provider in Banteay Meanchey helping businesses and organizations improve operations through modern software, IT consulting, digital solutions and IT support.",
+      "Learn about ICT Banteay Meanchey — a technology solutions provider helping businesses and organizations improve operations through modern software, IT consulting, digital solutions and IT support.",
     servicesTitle: "Services",
     servicesDescription:
       "Custom software development, IT consulting, business management systems, web applications, IT infrastructure, database management, IT support and digital transformation services.",
@@ -21,19 +21,19 @@ const en = {
       "Business automation, business management systems, digital transformation, information management, IT infrastructure and custom software solutions for modern businesses.",
     productsTitle: "Software Products",
     productsDescription:
-      "Business management systems by ICT BMC: restaurant, POS & inventory, accounting, hotel, school, HR & payroll, loan, pawn shop, rental, appointment booking, document and hospital management.",
+      "Business management systems by ICT Banteay Meanchey: restaurant, POS & inventory, accounting, hotel, school, HR & payroll, loan, pawn shop, rental, appointment booking, document and hospital management.",
     consultingTitle: "IT Consulting",
     consultingDescription:
       "Expert IT consulting in Cambodia: IT strategy, technology assessment, software selection, system architecture, infrastructure and network planning, cybersecurity assessment and IT project management.",
     projectsTitle: "Projects",
     projectsDescription:
-      "Explore demo projects illustrating the software development, business systems, web applications, IT infrastructure and digital transformation work ICT BMC can deliver.",
+      "Explore demo projects illustrating the software development, business systems, web applications, IT infrastructure and digital transformation work ICT Banteay Meanchey can deliver.",
     contactTitle: "Contact Us",
     contactDescription:
-      "Contact ICT BMC to discuss custom software, business management systems, IT consulting or technical support for your business.",
+      "Contact ICT Banteay Meanchey to discuss custom software, business management systems, IT consulting or technical support for your business.",
     notFoundTitle: "Page not found",
     productNotFound: "Product not found",
-    ogAlt: "ICT BMC — Your Trusted Technology Partner for Business Growth",
+    ogAlt: "ICT Banteay Meanchey — Your Trusted Technology Partner for Business Growth",
     ogHeadline: "Technology That Empowers Your Business.",
     ogSubline: "Software Development · IT Consulting · Business Systems · IT Support",
   },
@@ -55,7 +55,7 @@ const en = {
     mobileAria: "Mobile",
     openMenu: "Open menu",
     closeMenu: "Close menu",
-    homeAria: "ICT BMC — Home",
+    homeAria: "ICT Banteay Meanchey — Home",
     skipToContent: "Skip to main content",
     backToTop: "Back to top",
     language: "Language",
@@ -111,7 +111,7 @@ const en = {
   },
 
   home: {
-    heroPill: "Technology partner from Banteay Meanchey, Cambodia",
+    heroPill: "Banteay Meanchey · Your trusted technology partner",
     heroTitleA: "Technology That",
     heroTitleHighlight: "Empowers",
     heroTitleB: "Your Business.",
@@ -159,6 +159,28 @@ const en = {
     industriesTitle: "Industries We Can Support.",
     industriesDescription:
       "Our solutions are designed to adapt to the needs of organizations across a wide range of sectors.",
+    platform: {
+      eyebrow: "Integrated platform",
+      title: "One Connected System for Your Whole Business.",
+      description:
+        "Instead of disconnected spreadsheets and standalone tools, we connect your operations into one platform — so information flows automatically between departments and branches.",
+      points: [
+        "Enter data once — use it everywhere",
+        "Real-time reports for management",
+        "Secure access for every team and branch",
+      ],
+      hub: "Your Business Platform",
+      hubSub: "Connected by ICT Banteay Meanchey",
+      nodes: {
+        sales: "Sales & POS",
+        inventory: "Inventory",
+        finance: "Finance",
+        hr: "HR & Payroll",
+        customers: "Customers",
+        reports: "Reports",
+      },
+      diagramAria: "Diagram: six business modules connected to one central platform",
+    },
     mockup: {
       title: "Business Dashboard",
       revenue: "Revenue",
@@ -195,8 +217,8 @@ const en = {
     approachTitle: "How We Partner With Clients.",
     approachDescription:
       "Technology only creates value when it fits the people and processes it serves. Our approach keeps your business at the center of every decision.",
-    whyEyebrow: "Why ICT BMC",
-    whyTitle: "Why Choose ICT BMC?",
+    whyEyebrow: "Why ICT Banteay Meanchey",
+    whyTitle: "Why Choose ICT Banteay Meanchey?",
     whyDescription: "What you can expect when you work with us.",
     whyCta: "Let's discuss your goals.",
     layers: {
@@ -230,6 +252,20 @@ const en = {
     listAria: "Our solutions",
     discuss: "Discuss this solution",
     explore: "Explore {title}",
+    journey: {
+      eyebrow: "Digital transformation journey",
+      title: "From Manual Work to Data-Driven Decisions.",
+      description:
+        "We help you move forward one practical step at a time, at a pace that fits your team and budget.",
+      stage: "Stage {n}",
+      stages: [
+        { title: "Manual processes", description: "Paper forms, spreadsheets and repeated data entry." },
+        { title: "Digitized records", description: "Information stored securely in organized digital systems." },
+        { title: "Connected systems", description: "Departments share one platform and data flows automatically." },
+        { title: "Data-driven decisions", description: "Live dashboards and reports guide everyday decisions." },
+      ],
+      diagramAria: "Diagram: four stages of digital transformation, rising from manual processes to data-driven decisions",
+    },
     pathsAria: "Where to start",
     readyTitle: "Need a ready-made system?",
     readyText:
@@ -256,6 +292,17 @@ const en = {
     processTitle: "From Understanding to Ongoing Support.",
     processDescription:
       "A structured five-step engagement that turns business challenges into practical, implemented solutions.",
+    assessment: {
+      eyebrow: "Technology assessment",
+      title: "See Where You Are — and Where You Could Be.",
+      description:
+        "Our assessments review six key areas of your technology. The result is a clear picture of today's strengths and gaps, and a practical roadmap toward your target.",
+      current: "Current state",
+      target: "Target state",
+      illustrative: "Illustrative example — every assessment is tailored to your organization.",
+      axes: ["Strategy", "Applications", "Data", "Infrastructure", "Security", "Processes"],
+      diagramAria: "Radar chart comparing an example current state with a target state across six technology areas",
+    },
     ctaTitle: "Discuss Your Technology Needs.",
     ctaDescription:
       "Share your goals and challenges with us. We will help you understand your options and recommend a practical path forward.",
@@ -296,7 +343,7 @@ const en = {
       overviewEyebrow: "Overview",
       overviewTitle: "Product Overview",
       configured:
-        "The {name} is configured to your organization during implementation, with optional customization and integration with your existing tools. ICT BMC provides onboarding, training and ongoing technical support.",
+        "The {name} is configured to your organization during implementation, with optional customization and integration with your existing tools. ICT Banteay Meanchey provides onboarding, training and ongoing technical support.",
       challengesAria: "Business challenges and solution",
       challenges: "Business Challenges",
       solution: "Our Solution",
@@ -331,7 +378,7 @@ const en = {
     noteA: "all entries below are",
     noteDemo: "demo concepts",
     noteB:
-      "created to illustrate the types of solutions ICT BMC can deliver. They do not represent actual clients, engagements or results. Real case studies will be published here with client permission.",
+      "created to illustrate the types of solutions ICT Banteay Meanchey can deliver. They do not represent actual clients, engagements or results. Real case studies will be published here with client permission.",
     ctaTitle: "Have a project in mind?",
     ctaDescription: "Tell us what you want to achieve and we'll help you scope, design and deliver it.",
     filterAria: "Filter by category",
@@ -347,7 +394,7 @@ const en = {
     demoIllustrative: "Demo / illustrative",
     stack: "Technology stack",
     demoNote:
-      "This is a demo concept that illustrates the type of solution ICT BMC can deliver. It does not represent an actual client project.",
+      "This is a demo concept that illustrates the type of solution ICT Banteay Meanchey can deliver. It does not represent an actual client project.",
     discussSimilar: "Discuss a similar project",
     categories: {
       "Software Development": "Software Development",
@@ -378,7 +425,7 @@ const en = {
     officeAddress: "Office address",
     hours: "Business hours",
     tba: "To be announced",
-    mapTitle: "ICT BMC office location map",
+    mapTitle: "ICT Banteay Meanchey office location map",
     openInMaps: "Open in Maps",
     form: {
       title: "Send us a message",
@@ -414,7 +461,7 @@ const en = {
       demoModeStrong: "Demo mode:",
       demoModeA: "this website is a frontend-only demo, so your message was",
       demoModeNotSent: "not sent",
-      demoModeB: "to a server. Please contact ICT BMC directly using the details on this page.",
+      demoModeB: "to a server. Please contact ICT Banteay Meanchey directly using the details on this page.",
       received: "Your message has been received. Our team will get back to you as soon as possible.",
       sendAnother: "Send another message",
     },
@@ -428,6 +475,59 @@ const en = {
       "Digital Transformation": "Digital Transformation",
       Other: "Other",
     },
+  },
+
+  slideshow: {
+    region: "Featured illustrations",
+    slide: "Slide {n} of {total}",
+    goTo: "Show slide {n}: {title}",
+    prev: "Previous slide",
+    next: "Next slide",
+    pause: "Pause slideshow",
+    play: "Play slideshow",
+  },
+
+  slides: {
+    dashboard: { title: "Real-time business dashboards", text: "See sales, operations and performance at a glance." },
+    code: { title: "Custom software, built properly", text: "Clean code, automated testing and reliable deployment." },
+    network: { title: "Connected infrastructure", text: "Networks, servers and branches working as one." },
+    roadmap: { title: "A clear technology roadmap", text: "Practical phases from assessment to ongoing support." },
+    security: { title: "Secure and reliable systems", text: "Protection, backups and access control by design." },
+    analytics: { title: "Insights from your data", text: "Reports and analytics that support better decisions." },
+    workflow: { title: "Automated workflows", text: "Approvals and tasks that move forward on their own." },
+    devices: { title: "Works on every device", text: "Responsive web applications for desktop, tablet and mobile." },
+    chat: { title: "Responsive support", text: "Real people ready to help when you need it." },
+    map: { title: "Based in Banteay Meanchey", text: "Serei Saophoan, Banteay Meanchey Province, Cambodia." },
+    benefits: { title: "Benefits for your business", text: "Less manual work, better accuracy, clearer insights." },
+  },
+
+  figures: {
+    buildPassed: "Build passed",
+    testsPassed: "128 tests passed",
+    deployed: "Deployed to production",
+    cloud: "Cloud",
+    firewall: "Firewall",
+    servers: "Servers",
+    headOffice: "Head office",
+    branch: "Branch",
+    devices: "Devices",
+    phases: ["Assess", "Plan", "Implement", "Support"],
+    quarters: ["Q1", "Q2", "Q3", "Q4"],
+    roadmapTitle: "Technology roadmap",
+    secure: "Protected",
+    securityItems: ["Firewall active", "Daily backups", "Access control", "Updates applied"],
+    revenueByBranch: "Revenue by branch",
+    growth: "Growth",
+    monthly: "Monthly trend",
+    automation: "Automated",
+    workflowSteps: ["Request", "Approve", "Process", "Notify"],
+    support: "Support",
+    resolved: "Resolved",
+    chatClient: "Hello, our POS printer stopped working this morning.",
+    chatAgent: "We've connected remotely and reinstalled the driver. Please try printing again.",
+    chatClient2: "It works now — thank you!",
+    office: "Office",
+    benefitsTitle: "Key benefits",
   },
 
   notFound: {

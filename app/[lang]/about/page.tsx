@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ArrowRight, Eye, MapPin, Target } from "lucide-react";
 import { PageHero } from "@/components/shared/page-hero";
+import { PageSlideshow } from "@/components/figures/hero-slides";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { IconTile } from "@/components/ui/icon-tile";
 import { ButtonLink } from "@/components/ui/button";
@@ -28,6 +29,7 @@ export default async function AboutPage() {
   return (
     <>
       <PageHero
+        aside={<PageSlideshow page="about" />}
         eyebrow={t.eyebrow}
         title={
           <>
@@ -219,7 +221,7 @@ function TechVisual({ layers: l }: { layers: Dictionary["about"]["layers"] }) {
         {layers.map((layer, i) => (
           <div key={layer.label}>
             <div className="rounded-2xl bg-white/[0.04] p-4 ring-1 ring-white/10">
-              <p className="font-mono text-[10px] tracking-widest text-accent-400 uppercase">{layer.label}</p>
+              <p className="font-mono text-xs tracking-widest text-accent-400 uppercase">{layer.label}</p>
               <div className="mt-3 flex flex-wrap gap-2">
                 {layer.items.map((it) => (
                   <span key={it} className="rounded-lg bg-white/5 px-3 py-1.5 text-xs text-slate-200 ring-1 ring-white/10">

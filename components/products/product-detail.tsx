@@ -1,6 +1,7 @@
 import { AlertTriangle, ArrowRight, CircleCheck, Lightbulb } from "lucide-react";
 import type { Product } from "@/types";
 import { PageHero } from "@/components/shared/page-hero";
+import { ProductSlideshow } from "@/components/figures/hero-slides";
 import { ProductMockup } from "@/components/shared/product-mockup";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { ButtonLink } from "@/components/ui/button";
@@ -43,15 +44,7 @@ export async function ProductDetail({ product }: { product: Product }) {
             </ButtonLink>
           </>
         }
-        aside={
-          <div className="relative">
-            <div
-              aria-hidden
-              className="absolute -inset-8 -z-10 rounded-full bg-gradient-to-tr from-brand-600/30 to-accent-500/20 blur-3xl"
-            />
-            <ProductMockup product={product} className="shadow-2xl shadow-black/40" />
-          </div>
-        }
+        aside={<ProductSlideshow product={product} />}
       />
 
       {/* 2. Overview */}

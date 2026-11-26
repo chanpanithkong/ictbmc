@@ -3,6 +3,7 @@ import { getI18n } from "@/lib/i18n/server";
 import { localizedMetadata } from "@/lib/i18n/metadata";
 import { Info } from "lucide-react";
 import { PageHero } from "@/components/shared/page-hero";
+import { PageSlideshow } from "@/components/figures/hero-slides";
 import { ProjectExplorer } from "@/components/projects/project-explorer";
 import { CtaSection } from "@/components/shared/cta-section";
 
@@ -17,6 +18,7 @@ export default async function ProjectsPage() {
   return (
     <>
       <PageHero
+        aside={<PageSlideshow page="projects" />}
         eyebrow={t.eyebrow}
         title={
           <>

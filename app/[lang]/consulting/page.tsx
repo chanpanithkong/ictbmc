@@ -4,10 +4,12 @@ import { localizedMetadata } from "@/lib/i18n/metadata";
 import { ArrowRight } from "lucide-react";
 import { getConsultingProcess, getConsultingServices } from "@/lib/i18n/content";
 import { PageHero } from "@/components/shared/page-hero";
+import { PageSlideshow } from "@/components/figures/hero-slides";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { IconTile } from "@/components/ui/icon-tile";
 import { ButtonLink } from "@/components/ui/button";
 import { ProcessTimeline } from "@/components/shared/process-timeline";
+import { AssessmentRadar } from "@/components/diagrams/assessment-radar";
 import { CtaSection } from "@/components/shared/cta-section";
 import { revealDelay } from "@/lib/utils";
 
@@ -25,6 +27,7 @@ export default async function ConsultingPage() {
   return (
     <>
       <PageHero
+        aside={<PageSlideshow page="consulting" />}
         eyebrow={t.eyebrow}
         title={
           <>
@@ -72,6 +75,36 @@ export default async function ConsultingPage() {
                 <p className="mt-2 text-sm leading-relaxed text-slate-600">{c.description}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Assessment radar */}
+      <section className="relative overflow-hidden bg-surface py-24 sm:py-28" aria-labelledby="assessment-title">
+        <div aria-hidden className="bg-grid-light mask-radial absolute inset-0" />
+        <div className="relative container-page grid items-center gap-12 lg:grid-cols-[1fr_1.15fr]">
+          <div data-reveal>
+            <SectionHeading
+              eyebrow={t.assessment.eyebrow}
+              title={<span id="assessment-title">{t.assessment.title}</span>}
+              description={t.assessment.description}
+            />
+            <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm font-medium text-navy-900">
+              <li className="flex items-center gap-2.5">
+                <span aria-hidden className="h-0.5 w-6 rounded bg-[repeating-linear-gradient(90deg,#f59e0b_0_6px,transparent_6px_10px)]" />
+                <span aria-hidden className="size-3 rounded-full bg-amber-500" />
+                {t.assessment.current}
+              </li>
+              <li className="flex items-center gap-2.5">
+                <span aria-hidden className="h-0.5 w-6 rounded bg-brand-600" />
+                <span aria-hidden className="size-3 rounded-full border-2 border-brand-600 bg-white" />
+                {t.assessment.target}
+              </li>
+            </ul>
+            <p className="mt-6 text-sm text-slate-500 italic">{t.assessment.illustrative}</p>
+          </div>
+          <div data-reveal className="rounded-3xl bg-white p-3 shadow-xl ring-1 shadow-brand-900/5 ring-slate-200 sm:p-5">
+            <AssessmentRadar axes={t.assessment.axes} label={t.assessment.diagramAria} />
           </div>
         </div>
       </section>

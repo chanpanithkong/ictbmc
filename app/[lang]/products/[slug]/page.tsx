@@ -6,6 +6,7 @@ import { JsonLd } from "@/components/shared/json-ld";
 import { absoluteUrl } from "@/lib/utils";
 import { getI18n } from "@/lib/i18n/server";
 import { getProduct } from "@/lib/i18n/content";
+import { company } from "@/data/company";
 import { localizedMetadata } from "@/lib/i18n/metadata";
 import { localeMeta, localizeHref } from "@/lib/i18n/config";
 
@@ -45,7 +46,7 @@ export default async function ProductPage({ params }: PageProps<"/[lang]/product
           description: product.description,
           url: url(`/products/${product.slug}`),
           featureList: product.features,
-          publisher: { "@type": "Organization", name: "ICT BMC" },
+          publisher: { "@type": "Organization", name: company.name },
         }}
       />
       <JsonLd

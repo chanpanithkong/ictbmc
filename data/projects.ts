@@ -11,7 +11,7 @@ export const projectCategories: ProjectCategory[] = [
 /**
  * DEMO PROJECTS
  *
- * Every entry below is an illustrative concept showing the type of work ICT BMC
+ * Every entry below is an illustrative concept showing the type of work ICT Banteay Meanchey
  * can deliver. None of them represent an actual client, engagement or outcome.
  * Replace them with real case studies (and set `isDemo: false`) once client
  * approval to publish has been obtained.

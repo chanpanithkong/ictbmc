@@ -48,7 +48,7 @@ export async function PageHero({ eyebrow, title, description, breadcrumbs, actio
               <span aria-hidden className="h-px w-6 bg-accent-400/60" />
               {eyebrow}
             </p>
-            <h1 className="text-4xl font-semibold tracking-tight text-balance text-white sm:text-5xl lg:text-[3.4rem] lg:leading-[1.08]">
+            <h1 className="text-4xl font-semibold tracking-tight text-balance text-white sm:text-5xl lg:text-[3.9rem] lg:leading-[1.08]">
               {title}
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-pretty text-slate-400">{description}</p>

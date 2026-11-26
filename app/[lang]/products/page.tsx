@@ -3,6 +3,7 @@ import { getI18n } from "@/lib/i18n/server";
 import { localizedMetadata } from "@/lib/i18n/metadata";
 import { ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/shared/page-hero";
+import { PageSlideshow } from "@/components/figures/hero-slides";
 import { ProductExplorer } from "@/components/products/product-explorer";
 import { CtaSection } from "@/components/shared/cta-section";
 import { ButtonLink } from "@/components/ui/button";
@@ -18,6 +19,7 @@ export default async function ProductsPage() {
   return (
     <>
       <PageHero
+        aside={<PageSlideshow page="products" />}
         eyebrow={t.eyebrow}
         title={
           <>

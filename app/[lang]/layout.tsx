@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Kantumruy_Pro } from "next/font/google";
 import "../globals.css";
-import { contact, officeLocation, seoKeywords, socialLinks } from "@/data/company";
+import { company as companyEn, contact, officeLocation, seoKeywords, socialLinks } from "@/data/company";
+import { companyKh } from "@/data/kh/general";
 import { absoluteUrl } from "@/lib/utils";
 import { locales, localeMeta, localizeHref } from "@/lib/i18n/config";
 import { getI18n } from "@/lib/i18n/server";
@@ -55,7 +56,8 @@ export default async function RootLayout({ children }: LayoutProps<"/[lang]">) {
   const organizationLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: company.name,
+    name: companyEn.name,
+    alternateName: [companyEn.shortName, companyKh.name],
     url: absoluteUrl(localizeHref(locale, "/")),
     slogan: company.tagline,
     description: company.shortDescription,
@@ -65,7 +67,6 @@ export default async function RootLayout({ children }: LayoutProps<"/[lang]">) {
     ],
     address: {
       "@type": "PostalAddress",
-      streetAddress: officeLocation.plusCode,
       addressLocality: officeLocation.locality,
       addressRegion: company.province,
       addressCountry: company.countryCode,
@@ -81,13 +82,17 @@ export default async function RootLayout({ children }: LayoutProps<"/[lang]">) {
     ...(socialLinks.some((s) => s.href) && { sameAs: socialLinks.filter((s) => s.href).map((s) => s.href) }),
   };
 
+  // suppressHydrationWarning on <html>/<body> only ignores *attribute* differences on these two
+  // elements (one level deep). Browser extensions such as QuillBot or Grammarly add attributes
+  // like data-qb-installed here before React loads; real mismatches in the page are still reported.
   return (
     <html
       lang={localeMeta[locale].htmlLang}
       className={`${geistSans.variable} ${geistMono.variable} ${kantumruy.variable} antialiased`}
       data-scroll-behavior="smooth"
+      suppressHydrationWarning
     >
-      <body className="flex min-h-dvh flex-col bg-white font-sans text-ink">
+      <body className="flex min-h-dvh flex-col bg-white font-sans text-ink" suppressHydrationWarning>
         <I18nProvider locale={locale} dict={dict}>
           <a
             href="#main-content"

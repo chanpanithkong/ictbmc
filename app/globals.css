@@ -6,6 +6,18 @@
 }
 
 @theme {
+  /* Type scale: larger than Tailwind's defaults for readability (spacing is unchanged) */
+  --text-xs: 0.875rem; /* 14px (default 12) */
+  --text-sm: 1rem; /* 16px (default 14) */
+  --text-base: 1.125rem; /* 18px (default 16) */
+  --text-lg: 1.25rem; /* 20px (default 18) */
+  --text-xl: 1.5rem; /* 24px (default 20) */
+  --text-2xl: 1.75rem; /* 28px (default 24) */
+  --text-3xl: 2.125rem; /* 34px (default 30) */
+  --text-4xl: 2.75rem; /* 44px (default 36) */
+  --text-5xl: 3.5rem; /* 56px (default 48) */
+  --text-6xl: 4.25rem; /* 68px (default 60) */
+
   /* Brand palette */
   --color-navy-950: #070b16;
   --color-navy-900: #0b1120;
@@ -28,6 +40,24 @@
 
   --animate-float: float 7s ease-in-out infinite;
   --animate-pulse-dot: pulse-dot 2.4s ease-in-out infinite;
+  --animate-flow: flow 1.4s linear infinite;
+  --animate-slide-progress: slide-progress 6s linear forwards;
+
+  @keyframes slide-progress {
+    from {
+      width: 0%;
+    }
+    to {
+      width: 100%;
+    }
+  }
+  --animate-spin-slow: spin 40s linear infinite;
+
+  @keyframes flow {
+    to {
+      stroke-dashoffset: -12;
+    }
+  }
 
   @keyframes float {
     0%,
@@ -63,11 +93,15 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
+  font-size: var(--text-base);
 }
 
 /* Khmer typography: taller line-height for stacked vowels/subscripts, no negative tracking */
-:lang(km) {
+html:lang(km) {
   line-height: 1.8;
+}
+:lang(km) .leading-relaxed {
+  line-height: 1.85;
 }
 :lang(km) :is(h1, h2, h3, h4) {
   letter-spacing: 0;

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { locales, localeMeta, localizeHref, type Locale } from "./config";
+import { defaultLocale, locales, localeMeta, localizeHref, type Locale } from "./config";
 
 /** Canonical + hreflang alternates + Open Graph locale for a locale-free path */
 export function localizedMetadata(
@@ -9,7 +9,7 @@ export function localizedMetadata(
 ): Metadata {
   const languages: Record<string, string> = {};
   for (const l of locales) languages[localeMeta[l].hreflang] = localizeHref(l, path);
-  languages["x-default"] = localizeHref("en", path);
+  languages["x-default"] = localizeHref(defaultLocale, path);
 
   return {
     title: absoluteTitle ? { absolute: title } : title,

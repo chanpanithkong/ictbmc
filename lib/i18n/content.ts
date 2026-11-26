@@ -63,6 +63,7 @@ export function getCompany(locale: Locale) {
   const kh = isKh(locale);
   return {
     ...company,
+    name: kh ? companyKh.name : company.name,
     tagline: kh ? companyKh.tagline : company.tagline,
     shortDescription: kh ? companyKh.shortDescription : company.shortDescription,
     overview: kh ? companyKh.overview : [...company.overview],

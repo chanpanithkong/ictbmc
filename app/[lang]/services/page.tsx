@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { getServices } from "@/lib/i18n/content";
 import { localizeNumber } from "@/lib/i18n/format";
 import { PageHero } from "@/components/shared/page-hero";
+import { PageSlideshow } from "@/components/figures/hero-slides";
 import { IconTile } from "@/components/ui/icon-tile";
 import { CheckList } from "@/components/ui/check-list";
 import { ButtonLink } from "@/components/ui/button";
@@ -24,6 +25,7 @@ export default async function ServicesPage() {
   return (
     <>
       <PageHero
+        aside={<PageSlideshow page="services" />}
         eyebrow={t.eyebrow}
         title={
           <>

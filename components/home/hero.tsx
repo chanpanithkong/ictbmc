@@ -1,6 +1,6 @@
 import { ArrowRight, CircleCheck } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button";
-import { DashboardMockup } from "@/components/shared/dashboard-mockup";
+import { PageSlideshow } from "@/components/figures/hero-slides";
 import { getI18n } from "@/lib/i18n/server";
 
 export async function Hero() {
@@ -21,7 +21,7 @@ export async function Hero() {
       <div className="container-page grid items-center gap-16 lg:grid-cols-[1.05fr_1fr] lg:gap-12">
         <div>
           <p className="inline-flex items-center gap-2 rounded-full bg-white/5 py-1 pr-3 pl-1 text-xs font-medium text-slate-300 ring-1 ring-white/10">
-            <span className="shrink-0 rounded-full bg-brand-600 px-2 py-0.5 text-[11px] whitespace-nowrap text-white">ICT BMC</span>
+            <span className="shrink-0 rounded-full bg-brand-600 px-2 py-0.5 text-xs whitespace-nowrap text-white">ICT</span>
             {h.heroPill}
           </p>
           <h1 className="mt-7 text-4xl font-semibold tracking-tight text-balance text-white sm:text-5xl lg:text-6xl lg:leading-[1.05]">
@@ -50,7 +50,7 @@ export async function Hero() {
         </div>
 
         <div className="relative lg:pl-4">
-          <DashboardMockup />
+          <PageSlideshow page="home" />
         </div>
       </div>
     </section>

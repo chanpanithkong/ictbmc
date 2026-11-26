@@ -6,6 +6,7 @@ import { getI18n } from "@/lib/i18n/server";
 import { getCompany } from "@/lib/i18n/content";
 import { localizedMetadata } from "@/lib/i18n/metadata";
 import { PageHero } from "@/components/shared/page-hero";
+import { PageSlideshow } from "@/components/figures/hero-slides";
 import { ContactForm } from "@/components/contact/contact-form";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -32,6 +33,7 @@ export default async function ContactPage() {
   return (
     <>
       <PageHero
+        aside={<PageSlideshow page="contact" />}
         eyebrow={t.eyebrow}
         title={
           <>

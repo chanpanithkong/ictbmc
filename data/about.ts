@@ -16,7 +16,7 @@ export const vision =
   "To become a trusted technology partner for businesses and organizations by delivering quality technology services, innovative solutions, and sustainable digital transformation.";
 
 export const whoWeAre =
-  "ICT BMC is a technology solutions provider committed to helping businesses and organizations improve their operations through modern software, technology consulting, digital solutions, and IT support.";
+  "ICT Banteay Meanchey is a technology solutions provider committed to helping businesses and organizations improve their operations through modern software, technology consulting, digital solutions, and IT support.";
 
 export const coreValues: { title: string; description: string; icon: LucideIcon }[] = [
   {

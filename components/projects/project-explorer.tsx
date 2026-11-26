@@ -71,7 +71,7 @@ export function ProjectExplorer() {
               <div className="relative aspect-[16/9]">
                 <ProjectVisual visual={p.visual} />
                 {p.isDemo && (
-                  <span className="absolute top-3 left-3 rounded-full bg-amber-400 px-2.5 py-0.5 text-[11px] font-semibold text-amber-950">
+                  <span className="absolute top-3 left-3 rounded-full bg-amber-400 px-2.5 py-0.5 text-xs font-semibold text-amber-950">
                     {t.demoBadge}
                   </span>
                 )}
@@ -85,7 +85,7 @@ export function ProjectExplorer() {
                 <p className="mt-2 text-sm leading-relaxed text-slate-600">{p.description}</p>
                 <ul className="mt-4 flex flex-wrap gap-1.5" aria-label={t.stackAria}>
                   {p.stack.map((tech) => (
-                    <li key={tech} className="rounded-md bg-slate-100 px-2 py-0.5 font-mono text-[11px] text-slate-600">
+                    <li key={tech} className="rounded-md bg-slate-100 px-2 py-0.5 font-mono text-xs text-slate-600">
                       {tech}
                     </li>
                   ))}

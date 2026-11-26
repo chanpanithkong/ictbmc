@@ -6,13 +6,15 @@
  * excluded from structured data automatically.
  */
 export const company = {
-  name: "ICT BMC",
-  legalName: "ICT BMC",
+  name: "ICT Banteay Meanchey",
+  /** Short form, still used in SEO keywords and structured data */
+  shortName: "ICT BMC",
+  legalName: "ICT Banteay Meanchey",
   tagline: "Your Trusted Technology Partner for Business Growth.",
   shortDescription:
-    "ICT BMC is a technology solutions provider specializing in software development, business management systems, IT consulting, IT infrastructure, technical support, and digital transformation.",
+    "ICT Banteay Meanchey is a technology solutions provider specializing in software development, business management systems, IT consulting, IT infrastructure, technical support, and digital transformation.",
   overview: [
-    "ICT BMC is a technology solutions provider specializing in software development, business management systems, IT consulting, IT infrastructure, technical support, and digital transformation.",
+    "ICT Banteay Meanchey is a technology solutions provider specializing in software development, business management systems, IT consulting, IT infrastructure, technical support, and digital transformation.",
     "We help businesses and organizations improve their operational efficiency, streamline business processes, manage information effectively, and adopt modern technology through reliable and customized solutions.",
     "Our goal is to deliver practical, scalable, user-friendly, and innovative technology solutions based on our clients' business needs.",
   ],
@@ -22,7 +24,7 @@ export const company = {
   province: "Banteay Meanchey",
   location: "Banteay Meanchey Province, Cambodia",
   nameMeaning:
-    "The name ICT BMC reflects our home in Banteay Meanchey (BMC) Province, Cambodia — bringing modern information and communication technology to businesses and organizations in the province and across the country.",
+    "ICT Banteay Meanchey — ICT BMC for short — is named after our home, Banteay Meanchey (BMC) Province, Cambodia. We bring modern information and communication technology to businesses and organizations in the province and across the country.",
 } as const;
 
 export interface ContactChannel {
@@ -39,7 +41,7 @@ export const contact = {
   /** International format without "+" or spaces, e.g. "85512345678" */
   whatsapp: "",
   /** Full office address */
-  address: "HXQC+JJM, Serei Saophoan, Banteay Meanchey Province, Cambodia",
+  address: "Serei Saophoan, Banteay Meanchey Province, Cambodia",
   /** Opening hours, e.g. "Mon – Fri, 8:00 – 17:00" */
   hours: "",
 };
@@ -49,7 +51,6 @@ const office = { lat: 13.5890535, lng: 102.9715752, zoom: 17 };
 
 export const officeLocation = {
   ...office,
-  plusCode: "HXQC+JJM",
   locality: "Serei Saophoan",
   embedUrl: `https://www.google.com/maps?q=${office.lat},${office.lng}&z=${office.zoom}&hl=en&output=embed`,
   linkUrl: `https://www.google.com/maps/search/?api=1&query=${office.lat},${office.lng}`,
@@ -86,6 +87,7 @@ export const contactServiceOptions = [
 ] as const;
 
 export const seoKeywords = [
+  "ICT Banteay Meanchey",
   "ICT BMC",
   "IT Company Banteay Meanchey",
   "Software Development Banteay Meanchey",

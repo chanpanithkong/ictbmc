@@ -5,9 +5,10 @@
  * is the ISO 639-1 code `km` ("kh" is the country code), so search engines and
  * screen readers identify the language correctly.
  */
-export const locales = ["en", "kh"] as const;
+export const locales = ["kh", "en"] as const;
 export type Locale = (typeof locales)[number];
-export const defaultLocale: Locale = "en";
+/** Khmer is the default; English is used only when the visitor has chosen it (cookie). */
+export const defaultLocale: Locale = "kh";
 export const localeCookie = "NEXT_LOCALE";
 
 export const localeMeta: Record<

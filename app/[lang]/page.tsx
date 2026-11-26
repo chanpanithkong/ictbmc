@@ -3,6 +3,7 @@ import { Hero } from "@/components/home/hero";
 import { IntroSection } from "@/components/home/intro-section";
 import { ServicesSection } from "@/components/home/services-section";
 import { SolutionsSection } from "@/components/home/solutions-section";
+import { PlatformSection } from "@/components/home/platform-section";
 import { ProductsSection } from "@/components/home/products-section";
 import { ProcessSection } from "@/components/home/process-section";
 import { IndustriesSection } from "@/components/home/industries-section";
@@ -25,6 +26,7 @@ export default function HomePage() {
       <Hero />
       <IntroSection />
       <ServicesSection />
+      <PlatformSection />
       <SolutionsSection />
       <ProductsSection />
       <ProcessSection />

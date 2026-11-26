@@ -6,6 +6,9 @@ import { ArrowRight, LayoutDashboard, Lightbulb } from "lucide-react";
 import { getSolutions } from "@/lib/i18n/content";
 import { format, localizeNumber } from "@/lib/i18n/format";
 import { PageHero } from "@/components/shared/page-hero";
+import { PageSlideshow } from "@/components/figures/hero-slides";
+import { SectionHeading } from "@/components/ui/section-heading";
+import { TransformationJourney } from "@/components/diagrams/transformation-journey";
 import { IconTile } from "@/components/ui/icon-tile";
 import { CheckList } from "@/components/ui/check-list";
 import { ButtonLink } from "@/components/ui/button";
@@ -25,6 +28,7 @@ export default async function SolutionsPage() {
   return (
     <>
       <PageHero
+        aside={<PageSlideshow page="solutions" />}
         eyebrow={t.eyebrow}
         title={
           <>
@@ -72,6 +76,31 @@ export default async function SolutionsPage() {
               </Link>
             </article>
           ))}
+        </div>
+      </section>
+
+      {/* Transformation journey */}
+      <section
+        className="relative isolate overflow-hidden bg-navy-900 py-24 sm:py-28"
+        aria-labelledby="journey-title"
+      >
+        <div className="bg-grid-dark mask-fade-b absolute inset-0 -z-10" aria-hidden />
+        <div
+          aria-hidden
+          className="absolute -right-32 -bottom-32 -z-10 size-[520px] rounded-full bg-accent-500/15 blur-3xl"
+        />
+        <div className="container-page">
+          <div data-reveal>
+            <SectionHeading
+              tone="dark"
+              eyebrow={t.journey.eyebrow}
+              title={<span id="journey-title">{t.journey.title}</span>}
+              description={t.journey.description}
+            />
+          </div>
+          <div className="mt-16">
+            <TransformationJourney t={t.journey} locale={locale} />
+          </div>
         </div>
       </section>
 
