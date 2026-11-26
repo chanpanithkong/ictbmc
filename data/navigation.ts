@@ -1,52 +1,46 @@
+import type { Dictionary } from "@/lib/i18n/dictionaries";
 import type { NavItem } from "@/types";
 
-export const mainNav: NavItem[] = [
-  { label: "Home", href: "/" },
-  { label: "About Us", href: "/about" },
-  { label: "Services", href: "/services" },
-  {
-    label: "Solutions",
-    href: "/solutions",
-    children: [
-      {
-        label: "All Solutions",
-        href: "/solutions",
-        description: "Technology solutions for modern businesses",
-      },
-      {
-        label: "Software Products",
-        href: "/products",
-        description: "Ready-to-deploy business management systems",
-      },
-      {
-        label: "IT Consulting",
-        href: "/consulting",
-        description: "Strategy, assessment and expert guidance",
-      },
-    ],
-  },
-  { label: "Projects", href: "/projects" },
-  { label: "Contact", href: "/contact" },
-];
+/** Paths are locale-free; the locale-aware Link adds the /en or /kh prefix. */
+export function getMainNav(d: Dictionary): NavItem[] {
+  return [
+    { label: d.nav.home, href: "/" },
+    { label: d.nav.about, href: "/about" },
+    { label: d.nav.services, href: "/services" },
+    {
+      label: d.nav.solutions,
+      href: "/solutions",
+      children: [
+        { label: d.nav.allSolutions, href: "/solutions", description: d.nav.allSolutionsDesc },
+        { label: d.nav.products, href: "/products", description: d.nav.productsDesc },
+        { label: d.nav.consulting, href: "/consulting", description: d.nav.consultingDesc },
+      ],
+    },
+    { label: d.nav.projects, href: "/projects" },
+    { label: d.nav.contact, href: "/contact" },
+  ];
+}
 
-export const footerNav = {
-  company: [
-    { label: "About Us", href: "/about" },
-    { label: "Services", href: "/services" },
-    { label: "Projects", href: "/projects" },
-    { label: "Contact", href: "/contact" },
-  ],
-  solutions: [
-    { label: "IT Consulting", href: "/consulting" },
-    { label: "Software Development", href: "/services#custom-software-development" },
-    { label: "Business Management Systems", href: "/services#business-management-systems" },
-    { label: "IT Support", href: "/services#it-support-maintenance" },
-  ],
-  products: [
-    { label: "Restaurant Management System", href: "/products/restaurant-management-system" },
-    { label: "POS & Inventory", href: "/products/pos-inventory-management-system" },
-    { label: "Accounting", href: "/products/accounting-management-system" },
-    { label: "HR & Payroll", href: "/products/hr-payroll-management-system" },
-    { label: "Hotel Management", href: "/products/hotel-management-system" },
-  ],
-} satisfies Record<string, NavItem[]>;
+export function getFooterNav(d: Dictionary) {
+  return {
+    company: [
+      { label: d.nav.about, href: "/about" },
+      { label: d.nav.services, href: "/services" },
+      { label: d.nav.projects, href: "/projects" },
+      { label: d.nav.contact, href: "/contact" },
+    ],
+    solutions: [
+      { label: d.nav.consulting, href: "/consulting" },
+      { label: d.footer.softwareDevelopment, href: "/services#custom-software-development" },
+      { label: d.footer.businessSystems, href: "/services#business-management-systems" },
+      { label: d.footer.itSupport, href: "/services#it-support-maintenance" },
+    ],
+    products: [
+      { label: d.footer.restaurant, href: "/products/restaurant-management-system" },
+      { label: d.footer.pos, href: "/products/pos-inventory-management-system" },
+      { label: d.footer.accounting, href: "/products/accounting-management-system" },
+      { label: d.footer.hr, href: "/products/hr-payroll-management-system" },
+      { label: d.footer.hotel, href: "/products/hotel-management-system" },
+    ],
+  } satisfies Record<string, NavItem[]>;
+}

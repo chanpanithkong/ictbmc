@@ -2,39 +2,26 @@ import { Building2, Puzzle, Sparkles } from "lucide-react";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { IconTile } from "@/components/ui/icon-tile";
 import { revealDelay } from "@/lib/utils";
+import { getI18n } from "@/lib/i18n/server";
 
-const features = [
-  {
-    title: "Business Technology",
-    description: "Modern technology solutions designed to improve business operations.",
-    icon: Building2,
-  },
-  {
-    title: "Digital Transformation",
-    description: "Helping organizations modernize their processes through digital technology.",
-    icon: Sparkles,
-  },
-  {
-    title: "Custom Solutions",
-    description: "Technology solutions tailored to your organization's requirements.",
-    icon: Puzzle,
-  },
-];
+const icons = [Building2, Sparkles, Puzzle];
 
-export function IntroSection() {
+export async function IntroSection() {
+  const { dict } = await getI18n();
+  const h = dict.home;
+  const features = h.introFeatures.map((f, i) => ({ ...f, icon: icons[i] }));
   return (
     <section className="bg-white py-24 sm:py-28" aria-labelledby="intro-title">
       <div className="container-page">
         <div className="grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:items-end">
           <div data-reveal>
             <SectionHeading
-              eyebrow="Who we help"
-              title={<span id="intro-title">Technology Solutions Built Around Your Business.</span>}
+              eyebrow={h.introEyebrow}
+              title={<span id="intro-title">{h.introTitle}</span>}
             />
           </div>
           <p data-reveal className="text-lg leading-relaxed text-slate-600 lg:pb-1">
-            Every business has unique challenges. We work closely with our clients to understand their needs and
-            deliver technology solutions that improve efficiency, productivity, and long-term growth.
+            {h.introDescription}
           </p>
         </div>
 

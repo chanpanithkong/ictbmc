@@ -15,3 +15,8 @@ export function absoluteUrl(path = "/") {
 export function revealDelay(index: number, step = 1) {
   return { "--reveal-step": Math.min(index * step, 6) } as React.CSSProperties;
 }
+
+/** Contact link that pre-selects the service and pre-fills a demo request for a product */
+export function demoHref(slug: string) {
+  return `/contact?service=${encodeURIComponent("Business Management Systems")}&product=${slug}`;
+}

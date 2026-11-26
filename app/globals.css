@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme inline {
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-geist-sans), var(--font-khmer), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 }
 
@@ -63,6 +63,18 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
+}
+
+/* Khmer typography: taller line-height for stacked vowels/subscripts, no negative tracking */
+:lang(km) {
+  line-height: 1.8;
+}
+:lang(km) :is(h1, h2, h3, h4) {
+  letter-spacing: 0;
+  line-height: 1.45;
+}
+:lang(km) .eyebrow {
+  letter-spacing: 0.04em;
 }
 
 ::selection {

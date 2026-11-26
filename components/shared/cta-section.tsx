@@ -1,17 +1,23 @@
 import { ArrowRight } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button";
+import { getI18n } from "@/lib/i18n/server";
 
-export function CtaSection({
-  title = "Ready to move your business forward?",
-  description = "Tell us about your goals and challenges. We will help you find a practical technology solution that fits your organization.",
-  primary = { label: "Let's Talk", href: "/contact" },
-  secondary = { label: "Explore Solutions", href: "/solutions" },
+export async function CtaSection({
+  title,
+  description,
+  primary,
+  secondary,
 }: {
   title?: string;
   description?: string;
   primary?: { label: string; href: string };
   secondary?: { label: string; href: string } | null;
 }) {
+  const { dict } = await getI18n();
+  title ??= dict.cta.title;
+  description ??= dict.cta.description;
+  primary ??= { label: dict.common.letsTalk, href: "/contact" };
+  if (secondary === undefined) secondary = { label: dict.common.exploreSolutions, href: "/solutions" };
   return (
     <section className="bg-white py-20 sm:py-24">
       <div className="container-page">

@@ -1,53 +1,54 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { ArrowUpRight, Clock, Mail, MapPin, MessageCircle, Phone, type LucideIcon } from "lucide-react";
-import { company, contact, officeLocation } from "@/data/company";
+import { contact, officeLocation } from "@/data/company";
+import { getI18n } from "@/lib/i18n/server";
+import { getCompany } from "@/lib/i18n/content";
+import { localizedMetadata } from "@/lib/i18n/metadata";
 import { PageHero } from "@/components/shared/page-hero";
 import { ContactForm } from "@/components/contact/contact-form";
 
-export const metadata: Metadata = {
-  title: "Contact Us",
-  description:
-    "Contact ICT BMC to discuss custom software, business management systems, IT consulting or technical support for your business.",
-  alternates: { canonical: "/contact" },
-  openGraph: { title: "Contact ICT BMC", url: "/contact" },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { locale, dict } = await getI18n();
+  return localizedMetadata(locale, "/contact", { title: dict.meta.contactTitle, description: dict.meta.contactDescription });
+}
 
-const channels: { label: string; value: string; href?: string; icon: LucideIcon }[] = [
-  { label: "Email", value: contact.email, href: contact.email && `mailto:${contact.email}`, icon: Mail },
-  { label: "Phone", value: contact.phone, href: contact.phone && `tel:${contact.phone.replace(/\s/g, "")}`, icon: Phone },
-  {
-    label: "WhatsApp",
-    value: contact.whatsapp && `+${contact.whatsapp}`,
-    href: contact.whatsapp && `https://wa.me/${contact.whatsapp}`,
-    icon: MessageCircle,
-  },
-  { label: "Office address", value: contact.address || company.location, href: officeLocation.linkUrl, icon: MapPin },
-  { label: "Business hours", value: contact.hours, icon: Clock },
-];
-
-export default function ContactPage() {
+export default async function ContactPage() {
+  const { locale, dict } = await getI18n();
+  const t = dict.contact;
+  const company = getCompany(locale);
+  const channels: { label: string; value: string; href?: string; icon: LucideIcon }[] = [
+    { label: t.email, value: contact.email, href: contact.email && `mailto:${contact.email}`, icon: Mail },
+    { label: t.phone, value: contact.phone, href: contact.phone && `tel:${contact.phone.replace(/\s/g, "")}`, icon: Phone },
+    {
+      label: t.whatsapp,
+      value: contact.whatsapp && `+${contact.whatsapp}`,
+      href: contact.whatsapp && `https://wa.me/${contact.whatsapp}`,
+      icon: MessageCircle,
+    },
+    { label: t.officeAddress, value: company.address || company.location, href: officeLocation.linkUrl, icon: MapPin },
+    { label: t.hours, value: contact.hours, icon: Clock },
+  ];
   return (
     <>
       <PageHero
-        eyebrow="Contact Us"
+        eyebrow={t.eyebrow}
         title={
           <>
-            Let&apos;s Build the Right Technology Solution{" "}
-            <span className="text-gradient">for Your Business.</span>
+            {t.titleA} <span className="text-gradient">{t.titleHighlight}</span>
           </>
         }
-        description="Whether you need custom software, a business management system, IT consulting, or technical support, our team is ready to help."
-        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Contact" }]}
+        description={t.description}
+        breadcrumbs={[{ label: dict.nav.home, href: "/" }, { label: dict.nav.contact }]}
       />
 
-      <section className="bg-surface py-16 sm:py-20" aria-label="Contact information and form">
+      <section className="bg-surface py-16 sm:py-20" aria-label={t.sectionAria}>
         <div className="container-page grid gap-8 lg:grid-cols-[0.85fr_1.15fr]">
           <div className="space-y-6">
             <div className="rounded-3xl bg-white p-6 ring-1 ring-slate-200 sm:p-8">
-              <h2 className="text-xl font-semibold text-navy-900">Get in touch</h2>
+              <h2 className="text-xl font-semibold text-navy-900">{t.getInTouch}</h2>
               <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                Reach out through any of the channels below, or send us a message using the form.
+                {t.getInTouchText}
               </p>
               <ul className="mt-6 divide-y divide-slate-100">
                 {channels.map((c) => {
@@ -72,7 +73,7 @@ export default function ContactPage() {
                             <p className="text-sm font-medium text-navy-900">{c.value}</p>
                           )
                         ) : (
-                          <p className="text-sm text-slate-400 italic">To be announced</p>
+                          <p className="text-sm text-slate-400 italic">{t.tba}</p>
                         )}
                       </div>
                     </li>
@@ -84,7 +85,7 @@ export default function ContactPage() {
             <figure className="overflow-hidden rounded-3xl bg-white ring-1 ring-slate-200">
               <iframe
                 src={officeLocation.embedUrl}
-                title="ICT BMC office location map"
+                title={t.mapTitle}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 allowFullScreen
@@ -93,7 +94,7 @@ export default function ContactPage() {
               <figcaption className="flex items-center justify-between gap-4 px-5 py-4">
                 <span className="flex items-center gap-2.5 text-sm font-medium text-navy-900">
                   <MapPin className="size-4 shrink-0 text-brand-600" aria-hidden />
-                  {contact.address || company.location}
+                  {company.address || company.location}
                 </span>
                 <a
                   href={officeLocation.linkUrl}
@@ -101,9 +102,9 @@ export default function ContactPage() {
                   rel="noopener noreferrer"
                   className="focus-ring inline-flex shrink-0 items-center gap-1 rounded text-sm font-medium text-brand-600 hover:text-brand-700"
                 >
-                  Open in Maps
+                  {t.openInMaps}
                   <ArrowUpRight className="size-4" aria-hidden />
-                  <span className="sr-only">(opens in a new tab)</span>
+                  <span className="sr-only">{dict.common.opensNewTab}</span>
                 </a>
               </figcaption>
             </figure>

@@ -1,24 +1,28 @@
 import { ArrowRight } from "lucide-react";
-import { services } from "@/data/services";
+import { getI18n } from "@/lib/i18n/server";
+import { getServices } from "@/lib/i18n/content";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { ButtonLink } from "@/components/ui/button";
 import { ServiceCard } from "@/components/services/service-card";
 import { revealDelay } from "@/lib/utils";
 
-export function ServicesSection() {
+export async function ServicesSection() {
+  const { locale, dict } = await getI18n();
+  const h = dict.home;
+  const services = getServices(locale);
   return (
     <section className="relative bg-surface py-24 sm:py-28" aria-labelledby="services-title">
       <div className="container-page">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div data-reveal>
             <SectionHeading
-              eyebrow="Services"
-              title={<span id="services-title">Comprehensive Technology Services.</span>}
-              description="End-to-end expertise across software, systems, infrastructure and support — delivered by one accountable partner."
+              eyebrow={h.servicesEyebrow}
+              title={<span id="services-title">{h.servicesTitle}</span>}
+              description={h.servicesDescription}
             />
           </div>
           <ButtonLink href="/services" variant="secondary" className="self-start md:self-auto">
-            All services
+            {h.allServices}
             <ArrowRight />
           </ButtonLink>
         </div>

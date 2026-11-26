@@ -27,6 +27,21 @@ Contact details are intentionally empty. Empty values show as "To be announced" 
 
 By default the form runs in **demo mode**. It validates in the browser and shows a success state, and it tells the user clearly that nothing was sent. To connect an approved form service or email provider later, set `mode: "endpoint"` and an `endpoint` URL. The form then POSTs its fields as JSON.
 
+## Languages (English / Khmer)
+
+Every page is available in English at `/en/...` and Khmer at `/kh/...`. The `<html lang>` and hreflang value for Khmer is `km`, the ISO language code.
+
+- `proxy.ts` redirects `/` (and any path without a locale) using the `NEXT_LOCALE` cookie, then the browser's `Accept-Language`, then English.
+- The EN / KH switch in the navbar keeps the current page and remembers the choice in that cookie.
+- **UI strings:** `lib/i18n/dictionaries/en.ts` and `kh.ts`. The Khmer file is type-checked against the English keys, so a missing key fails the build.
+- **Content:** English stays in `data/*.ts`. Khmer translations live in `data/kh/*.ts`, keyed by slug or list order, and `lib/i18n/content.ts` merges them. A missing Khmer entry falls back to English.
+- Server components read the locale through `next/root-params` (`getI18n()` in `lib/i18n/server.ts`). Client components use `useI18n()`.
+- Use `@/components/i18n/link` instead of `next/link`. It adds the `/en` or `/kh` prefix to internal paths automatically.
+- Khmer text uses the Kantumruy Pro font, with taller line-height and no negative letter-spacing.
+- Left in English on purpose: the product UI preview sample screens and the Open Graph image, which would need an embedded Khmer font file.
+
+Have a native Khmer speaker review the Khmer translations before launch.
+
 ## Content
 
 | File | Content |

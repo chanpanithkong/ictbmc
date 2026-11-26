@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
-import Link from "next/link";
+import Link from "@/components/i18n/link";
 import { ChevronRight } from "lucide-react";
+import { getI18n } from "@/lib/i18n/server";
 
 interface PageHeroProps {
   eyebrow: string;
@@ -11,7 +12,8 @@ interface PageHeroProps {
   aside?: ReactNode;
 }
 
-export function PageHero({ eyebrow, title, description, breadcrumbs, actions, aside }: PageHeroProps) {
+export async function PageHero({ eyebrow, title, description, breadcrumbs, actions, aside }: PageHeroProps) {
+  const { dict } = await getI18n();
   return (
     <section className="relative isolate overflow-hidden bg-navy-900 pt-32 pb-20 sm:pt-36 sm:pb-24">
       <div className="bg-grid-dark mask-fade-b absolute inset-0 -z-10" aria-hidden />
@@ -21,7 +23,7 @@ export function PageHero({ eyebrow, title, description, breadcrumbs, actions, as
       />
       <div className="container-page">
         {breadcrumbs && (
-          <nav aria-label="Breadcrumb" className="mb-8">
+          <nav aria-label={dict.nav.breadcrumb} className="mb-8">
             <ol className="flex flex-wrap items-center gap-1.5 text-sm text-slate-400">
               {breadcrumbs.map((b, i) => (
                 <li key={b.label} className="flex items-center gap-1.5">

@@ -1,9 +1,13 @@
-import { solutions } from "@/data/solutions";
+import { getI18n } from "@/lib/i18n/server";
+import { getSolutions } from "@/lib/i18n/content";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { SolutionCard } from "@/components/shared/solution-card";
 import { revealDelay } from "@/lib/utils";
 
-export function SolutionsSection() {
+export async function SolutionsSection() {
+  const { locale, dict } = await getI18n();
+  const h = dict.home;
+  const solutions = getSolutions(locale);
   return (
     <section className="relative isolate overflow-hidden bg-navy-900 py-24 sm:py-28" aria-labelledby="solutions-title">
       <div className="bg-grid-dark mask-radial absolute inset-0 -z-10" aria-hidden />
@@ -16,9 +20,9 @@ export function SolutionsSection() {
           <SectionHeading
             tone="dark"
             align="center"
-            eyebrow="Solutions"
-            title={<span id="solutions-title">Smart Solutions for Modern Businesses.</span>}
-            description="Explore our technology solutions designed to support businesses across different industries."
+            eyebrow={h.solutionsEyebrow}
+            title={<span id="solutions-title">{h.solutionsTitle}</span>}
+            description={h.solutionsDescription}
           />
         </div>
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

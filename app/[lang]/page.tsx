@@ -7,13 +7,17 @@ import { ProductsSection } from "@/components/home/products-section";
 import { ProcessSection } from "@/components/home/process-section";
 import { IndustriesSection } from "@/components/home/industries-section";
 import { CtaSection } from "@/components/shared/cta-section";
+import { getI18n } from "@/lib/i18n/server";
+import { localizedMetadata } from "@/lib/i18n/metadata";
 
-export const metadata: Metadata = {
-  title: { absolute: "ICT BMC — Software Development & IT Consulting in Banteay Meanchey, Cambodia" },
-  description:
-    "ICT BMC, a technology company in Banteay Meanchey Province, designs, develops and delivers custom software, business management systems, IT consulting, infrastructure and support that help businesses grow with confidence.",
-  alternates: { canonical: "/" },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { locale, dict } = await getI18n();
+  return localizedMetadata(locale, "/", {
+    title: dict.meta.homeTitle,
+    description: dict.meta.homeDescription,
+    absoluteTitle: true,
+  });
+}
 
 export default function HomePage() {
   return (

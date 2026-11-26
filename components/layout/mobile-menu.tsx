@@ -1,14 +1,18 @@
 "use client";
 
-import Link from "next/link";
+import Link from "@/components/i18n/link";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, Menu, X } from "lucide-react";
-import { mainNav } from "@/data/navigation";
+import { getMainNav } from "@/data/navigation";
 import { cn } from "@/lib/utils";
 import { ButtonLink } from "@/components/ui/button";
+import { useI18n } from "@/components/i18n/i18n-provider";
+import { LanguageSwitcher } from "@/components/i18n/language-switcher";
 
 /** Re-mounted on route change (keyed by pathname), so it closes automatically. */
 export function MobileMenu({ pathname }: { pathname: string }) {
+  const { dict } = useI18n();
+  const mainNav = getMainNav(dict);
   const [open, setOpen] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -44,7 +48,7 @@ export function MobileMenu({ pathname }: { pathname: string }) {
         type="button"
         aria-expanded={open}
         aria-controls="mobile-menu"
-        aria-label={open ? "Close menu" : "Open menu"}
+        aria-label={open ? dict.nav.closeMenu : dict.nav.openMenu}
         onClick={() => setOpen((v) => !v)}
         className="focus-ring inline-flex size-10 items-center justify-center rounded-full text-white ring-1 ring-white/15 hover:bg-white/10"
       >
@@ -57,7 +61,7 @@ export function MobileMenu({ pathname }: { pathname: string }) {
         hidden={!open}
         className="fixed inset-x-0 top-16 bottom-0 overflow-y-auto border-t border-white/10 bg-navy-900"
       >
-        <nav aria-label="Mobile" className="container-page py-6">
+        <nav aria-label={dict.nav.mobileAria} className="container-page py-6">
           <ul className="space-y-1">
             {mainNav.map((item) => (
               <li key={item.href}>
@@ -97,9 +101,12 @@ export function MobileMenu({ pathname }: { pathname: string }) {
             ))}
           </ul>
           <ButtonLink href="/contact" size="lg" className="mt-8 w-full" onClick={() => setOpen(false)}>
-            Let&apos;s Talk
+            {dict.common.letsTalk}
             <ArrowRight />
           </ButtonLink>
+          <div className="mt-6 flex justify-center">
+            <LanguageSwitcher size="lg" />
+          </div>
         </nav>
       </div>
     </div>

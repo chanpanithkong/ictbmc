@@ -1,8 +1,11 @@
-import { deliveryProcess } from "@/data/process";
+import { getI18n } from "@/lib/i18n/server";
+import { getDeliveryProcess } from "@/lib/i18n/content";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { ProcessTimeline } from "@/components/shared/process-timeline";
 
-export function ProcessSection({ tone = "dark" }: { tone?: "dark" | "light" }) {
+export async function ProcessSection({ tone = "dark" }: { tone?: "dark" | "light" }) {
+  const { locale, dict } = await getI18n();
+  const h = dict.home;
   const dark = tone === "dark";
   return (
     <section
@@ -14,13 +17,13 @@ export function ProcessSection({ tone = "dark" }: { tone?: "dark" | "light" }) {
         <div data-reveal>
           <SectionHeading
             tone={tone}
-            eyebrow="How we work"
-            title={<span id="process-title">A Clear, Proven Delivery Process.</span>}
-            description="From the first conversation to long-term support, every engagement follows a structured process that keeps you informed and in control."
+            eyebrow={h.processEyebrow}
+            title={<span id="process-title">{h.processTitle}</span>}
+            description={h.processDescription}
           />
         </div>
         <div className="mt-16">
-          <ProcessTimeline steps={deliveryProcess} tone={tone} />
+          <ProcessTimeline steps={getDeliveryProcess(locale)} tone={tone} />
         </div>
       </div>
     </section>

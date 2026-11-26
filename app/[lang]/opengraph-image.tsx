@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 
+// Note: rendered in English for both locales — Khmer glyphs would need an embedded Khmer font file.
 export const alt = "ICT BMC — Your Trusted Technology Partner for Business Growth";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
@@ -21,14 +22,7 @@ export default async function Image() {
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-          <div
-            style={{
-              width: 64,
-              height: 64,
-              borderRadius: 16,
-              background: "linear-gradient(135deg, #2563EB, #06B6D4)",
-            }}
-          />
+          <div style={{ width: 64, height: 64, borderRadius: 16, background: "linear-gradient(135deg, #2563EB, #06B6D4)" }} />
           <div style={{ fontSize: 40, fontWeight: 700, display: "flex" }}>
             ICT&nbsp;<span style={{ color: "#22D3EE" }}>BMC</span>
           </div>
@@ -38,7 +32,7 @@ export default async function Image() {
             Technology That Empowers Your Business.
           </div>
           <div style={{ fontSize: 30, color: "#94a3b8", marginTop: 28 }}>
-            Software Development · IT Consulting · Business Systems · IT Support
+            Banteay Meanchey, Cambodia · Software · IT Consulting · Business Systems
           </div>
         </div>
       </div>

@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { getI18n } from "@/lib/i18n/server";
+import { localizedMetadata } from "@/lib/i18n/metadata";
+import Link from "@/components/i18n/link";
 import { ArrowRight, LayoutDashboard, Lightbulb } from "lucide-react";
-import { solutions } from "@/data/solutions";
+import { getSolutions } from "@/lib/i18n/content";
+import { format, localizeNumber } from "@/lib/i18n/format";
 import { PageHero } from "@/components/shared/page-hero";
 import { IconTile } from "@/components/ui/icon-tile";
 import { CheckList } from "@/components/ui/check-list";
@@ -10,40 +13,40 @@ import { IndustriesSection } from "@/components/home/industries-section";
 import { CtaSection } from "@/components/shared/cta-section";
 import { revealDelay } from "@/lib/utils";
 
-export const metadata: Metadata = {
-  title: "Solutions",
-  description:
-    "Business automation, business management systems, digital transformation, information management, IT infrastructure and custom software solutions for modern businesses.",
-  alternates: { canonical: "/solutions" },
-  openGraph: { title: "Technology Solutions | ICT BMC", url: "/solutions" },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { locale, dict } = await getI18n();
+  return localizedMetadata(locale, "/solutions", { title: dict.meta.solutionsTitle, description: dict.meta.solutionsDescription });
+}
 
-export default function SolutionsPage() {
+export default async function SolutionsPage() {
+  const { locale, dict } = await getI18n();
+  const t = dict.solutions;
+  const solutions = getSolutions(locale);
   return (
     <>
       <PageHero
-        eyebrow="Solutions"
+        eyebrow={t.eyebrow}
         title={
           <>
-            Smart Solutions for <span className="text-gradient">Modern Businesses.</span>
+            {t.titleA} <span className="text-gradient">{t.titleHighlight}</span>
           </>
         }
-        description="Explore our technology solutions designed to support businesses across different industries."
-        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Solutions" }]}
+        description={t.description}
+        breadcrumbs={[{ label: dict.nav.home, href: "/" }, { label: dict.nav.solutions }]}
         actions={
           <>
             <ButtonLink href="/products" size="lg">
-              Browse Products
+              {t.browseProducts}
               <ArrowRight />
             </ButtonLink>
             <ButtonLink href="/consulting" size="lg" variant="ghostDark">
-              IT Consulting
+              {dict.nav.consulting}
             </ButtonLink>
           </>
         }
       />
 
-      <section className="bg-white py-24 sm:py-28" aria-label="Our solutions">
+      <section className="bg-white py-24 sm:py-28" aria-label={t.listAria}>
         <div className="container-page grid gap-6 md:grid-cols-2">
           {solutions.map((s, i) => (
             <article
@@ -55,7 +58,7 @@ export default function SolutionsPage() {
             >
               <div className="flex items-center justify-between">
                 <IconTile icon={s.icon} size="lg" />
-                <span className="font-mono text-sm text-slate-300">{String(i + 1).padStart(2, "0")}</span>
+                <span className="font-mono text-sm text-slate-300">{localizeNumber(String(i + 1).padStart(2, "0"), locale)}</span>
               </div>
               <h2 className="mt-6 text-2xl font-semibold text-navy-900">{s.title}</h2>
               <p className="mt-3 leading-relaxed text-slate-600">{s.description}</p>
@@ -64,7 +67,7 @@ export default function SolutionsPage() {
                 href={s.href.startsWith("/solutions") ? "/contact" : s.href}
                 className="focus-ring mt-auto inline-flex items-center gap-1.5 self-start rounded text-sm font-medium text-brand-600 hover:text-brand-700"
               >
-                {s.href.startsWith("/solutions") ? "Discuss this solution" : `Explore ${s.title}`}
+                {s.href.startsWith("/solutions") ? t.discuss : format(t.explore, { title: s.title })}
                 <ArrowRight className="size-4" aria-hidden />
               </Link>
             </article>
@@ -73,22 +76,22 @@ export default function SolutionsPage() {
       </section>
 
       {/* Paths */}
-      <section className="bg-surface py-20" aria-label="Where to start">
+      <section className="bg-surface py-20" aria-label={t.pathsAria}>
         <div className="container-page grid gap-6 md:grid-cols-2">
           {[
             {
               icon: LayoutDashboard,
-              title: "Need a ready-made system?",
-              text: "Browse 12 configurable business management products for restaurants, retail, finance, HR, education, healthcare and more.",
+              title: t.readyTitle,
+              text: t.readyText,
               href: "/products",
-              cta: "View software products",
+              cta: t.readyCta,
             },
             {
               icon: Lightbulb,
-              title: "Not sure where to start?",
-              text: "Our IT consulting services help you assess your current situation and plan the right technology investments.",
+              title: t.unsureTitle,
+              text: t.unsureText,
               href: "/consulting",
-              cta: "Explore IT consulting",
+              cta: t.unsureCta,
             },
           ].map((p) => (
             <Link

@@ -8,12 +8,15 @@ import {
   Wallet,
   Workflow,
 } from "lucide-react";
+import { getI18n } from "@/lib/i18n/server";
 
 /**
  * Decorative hero visual: an illustrative business dashboard with connected
  * systems. All values are sample UI data, not company statistics.
  */
-export function DashboardMockup() {
+export async function DashboardMockup() {
+  const { dict } = await getI18n();
+  const m = dict.home.mockup;
   const bars = [38, 52, 44, 66, 58, 74, 62, 81, 70, 88, 79, 92];
   return (
     <div className="relative mx-auto w-full max-w-[640px]" aria-hidden>
@@ -49,7 +52,7 @@ export function DashboardMockup() {
           <span className="size-2.5 rounded-full bg-white/15" />
           <span className="size-2.5 rounded-full bg-white/15" />
           <span className="ml-3 rounded-md bg-white/5 px-3 py-1 font-mono text-[10px] text-slate-400">
-            Business Dashboard
+            {m.title}
           </span>
         </div>
         <div className="flex">
@@ -66,9 +69,9 @@ export function DashboardMockup() {
           <div className="flex-1 space-y-4 p-4 sm:p-5">
             <div className="grid grid-cols-3 gap-3">
               {[
-                ["Revenue", "$84.2k", "+12.4%"],
-                ["Orders", "1,284", "+8.1%"],
-                ["Efficiency", "94%", "+3.2%"],
+                [m.revenue, "$84.2k", "+12.4%"],
+                [m.orders, "1,284", "+8.1%"],
+                [m.efficiency, "94%", "+3.2%"],
               ].map(([label, value, delta]) => (
                 <div key={label} className="rounded-xl bg-white/[0.04] p-3 ring-1 ring-white/5">
                   <p className="text-[10px] text-slate-400">{label}</p>
@@ -80,8 +83,8 @@ export function DashboardMockup() {
 
             <div className="rounded-xl bg-white/[0.04] p-4 ring-1 ring-white/5">
               <div className="mb-3 flex items-center justify-between">
-                <p className="text-xs font-medium text-slate-300">Performance overview</p>
-                <span className="rounded-md bg-white/5 px-2 py-0.5 text-[10px] text-slate-400">12 months</span>
+                <p className="text-xs font-medium text-slate-300">{m.performance}</p>
+                <span className="rounded-md bg-white/5 px-2 py-0.5 text-[10px] text-slate-400">{m.months}</span>
               </div>
               <svg viewBox="0 0 300 90" className="h-24 w-full" preserveAspectRatio="none">
                 <defs>
@@ -105,7 +108,7 @@ export function DashboardMockup() {
 
             <div className="grid grid-cols-5 gap-3">
               <div className="col-span-3 rounded-xl bg-white/[0.04] p-4 ring-1 ring-white/5">
-                <p className="mb-3 text-xs font-medium text-slate-300">Sales by month</p>
+                <p className="mb-3 text-xs font-medium text-slate-300">{m.salesByMonth}</p>
                 <div className="flex h-16 items-end gap-1">
                   {bars.map((h, i) => (
                     <span
@@ -117,8 +120,8 @@ export function DashboardMockup() {
                 </div>
               </div>
               <div className="col-span-2 space-y-2 rounded-xl bg-white/[0.04] p-4 ring-1 ring-white/5">
-                <p className="text-xs font-medium text-slate-300">Systems</p>
-                {["Sales", "Inventory", "Finance"].map((s) => (
+                <p className="text-xs font-medium text-slate-300">{m.systems}</p>
+                {[m.sales, m.inventory, m.finance].map((s) => (
                   <div key={s} className="flex items-center justify-between text-[10px] text-slate-400">
                     {s}
                     <span className="size-1.5 rounded-full bg-emerald-400" />
@@ -136,8 +139,8 @@ export function DashboardMockup() {
           <CircleCheck className="size-4" />
         </span>
         <div>
-          <p className="text-xs font-semibold text-navy-900">Inventory synced</p>
-          <p className="text-[10px] text-slate-500">All branches up to date</p>
+          <p className="text-xs font-semibold text-navy-900">{m.inventorySynced}</p>
+          <p className="text-[10px] text-slate-500">{m.inventorySyncedSub}</p>
         </div>
       </div>
       <div
@@ -148,8 +151,8 @@ export function DashboardMockup() {
           <Workflow className="size-4" />
         </span>
         <div>
-          <p className="text-xs font-semibold text-white">Workflow automated</p>
-          <p className="text-[10px] text-slate-400">Approval routed in seconds</p>
+          <p className="text-xs font-semibold text-white">{m.workflowAutomated}</p>
+          <p className="text-[10px] text-slate-400">{m.workflowAutomatedSub}</p>
         </div>
       </div>
     </div>

@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import { ArrowRight, Eye, MapPin, Target } from "lucide-react";
-import { company } from "@/data/company";
-import { approach, coreValues, mission, vision, whoWeAre, whyChooseUs } from "@/data/about";
 import { PageHero } from "@/components/shared/page-hero";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { IconTile } from "@/components/ui/icon-tile";
@@ -9,35 +7,43 @@ import { ButtonLink } from "@/components/ui/button";
 import { CtaSection } from "@/components/shared/cta-section";
 import { ProcessSection } from "@/components/home/process-section";
 import { revealDelay } from "@/lib/utils";
+import { getI18n } from "@/lib/i18n/server";
+import { getAbout, getCompany } from "@/lib/i18n/content";
+import { localizedMetadata } from "@/lib/i18n/metadata";
+import { localizeNumber } from "@/lib/i18n/format";
+import type { Dictionary } from "@/lib/i18n/dictionaries";
 
-export const metadata: Metadata = {
-  title: "About Us",
-  description:
-    "Learn about ICT BMC — a technology solutions provider helping businesses and organizations improve operations through modern software, IT consulting, digital solutions and IT support.",
-  alternates: { canonical: "/about" },
-  openGraph: { title: "About ICT BMC", url: "/about" },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { locale, dict } = await getI18n();
+  return localizedMetadata(locale, "/about", { title: dict.meta.aboutTitle, description: dict.meta.aboutDescription });
+}
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const { locale, dict } = await getI18n();
+  const t = dict.about;
+  const company = getCompany(locale);
+  const { approach, coreValues, mission, vision, whoWeAre, whyChooseUs } = getAbout(locale);
+  const num = (n: number) => localizeNumber(String(n).padStart(2, "0"), locale);
+
   return (
     <>
       <PageHero
-        eyebrow="About Us"
+        eyebrow={t.eyebrow}
         title={
           <>
-            Driving Business Innovation <span className="text-gradient">Through Technology.</span>
+            {t.titleA} <span className="text-gradient">{t.titleHighlight}</span>
           </>
         }
         description={company.tagline}
-        breadcrumbs={[{ label: "Home", href: "/" }, { label: "About Us" }]}
+        breadcrumbs={[{ label: dict.nav.home, href: "/" }, { label: dict.nav.about }]}
         actions={
           <>
             <ButtonLink href="/contact" size="lg">
-              Let&apos;s Talk
+              {dict.common.letsTalk}
               <ArrowRight />
             </ButtonLink>
             <ButtonLink href="/services" size="lg" variant="ghostDark">
-              Our Services
+              {dict.common.ourServices}
             </ButtonLink>
           </>
         }
@@ -47,7 +53,7 @@ export default function AboutPage() {
       <section className="bg-white py-24 sm:py-28" aria-labelledby="who-title">
         <div className="container-page grid gap-14 lg:grid-cols-2 lg:items-center">
           <div data-reveal>
-            <SectionHeading eyebrow="Who we are" title={<span id="who-title">A Practical Technology Partner.</span>} />
+            <SectionHeading eyebrow={t.whoEyebrow} title={<span id="who-title">{t.whoTitle}</span>} />
             <p className="mt-6 text-lg leading-relaxed text-slate-600">{whoWeAre}</p>
             {company.overview.slice(1).map((p) => (
               <p key={p} className="mt-4 leading-relaxed text-slate-600">
@@ -60,24 +66,24 @@ export default function AboutPage() {
               </span>
               <div>
                 <p className="font-semibold text-navy-900">
-                  What does <span className="text-brand-600">BMC</span> stand for?
+                  {t.bmcQuestionA} <span className="text-brand-600">BMC</span> {t.bmcQuestionB}
                 </p>
                 <p className="mt-1 text-sm leading-relaxed text-slate-600">{company.nameMeaning}</p>
               </div>
             </div>
           </div>
           <div data-reveal className="relative">
-            <TechVisual />
+            <TechVisual layers={t.layers} />
           </div>
         </div>
       </section>
 
       {/* Mission & vision */}
-      <section className="bg-surface py-24 sm:py-28" aria-label="Mission and vision">
+      <section className="bg-surface py-24 sm:py-28" aria-label={t.missionVisionAria}>
         <div className="container-page grid gap-6 md:grid-cols-2">
           {[
-            { label: "Our Mission", text: mission, icon: Target },
-            { label: "Our Vision", text: vision, icon: Eye },
+            { label: t.mission, text: mission, icon: Target },
+            { label: t.vision, text: vision, icon: Eye },
           ].map((item, i) => (
             <div
               key={item.label}
@@ -105,8 +111,8 @@ export default function AboutPage() {
           <div data-reveal>
             <SectionHeading
               align="center"
-              eyebrow="Core values"
-              title={<span id="values-title">The Principles Behind Our Work.</span>}
+              eyebrow={t.valuesEyebrow}
+              title={<span id="values-title">{t.valuesTitle}</span>}
             />
           </div>
           <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -133,9 +139,9 @@ export default function AboutPage() {
           <div data-reveal className="lg:sticky lg:top-28 lg:self-start">
             <SectionHeading
               tone="dark"
-              eyebrow="Our approach"
-              title={<span id="approach-title">How We Partner With Clients.</span>}
-              description="Technology only creates value when it fits the people and processes it serves. Our approach keeps your business at the center of every decision."
+              eyebrow={t.approachEyebrow}
+              title={<span id="approach-title">{t.approachTitle}</span>}
+              description={t.approachDescription}
             />
           </div>
           <ol className="relative space-y-6 border-l border-white/10 pl-8">
@@ -148,7 +154,7 @@ export default function AboutPage() {
                 <div className="rounded-2xl bg-white/[0.03] p-6 ring-1 ring-white/10">
                   <div className="flex items-center gap-4">
                     <IconTile icon={a.icon} tone="dark" size="sm" />
-                    <p className="font-mono text-xs text-accent-400">{a.phase}</p>
+                    <p className="font-mono text-xs text-accent-400">{localizeNumber(a.phase, locale)}</p>
                   </div>
                   <h3 className="mt-4 text-lg font-semibold text-white">{a.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-slate-400">{a.description}</p>
@@ -164,23 +170,23 @@ export default function AboutPage() {
         <div className="container-page">
           <div data-reveal>
             <SectionHeading
-              eyebrow="Why ICT BMC"
-              title={<span id="why-title">Why Choose ICT BMC?</span>}
-              description="What you can expect when you work with us."
+              eyebrow={t.whyEyebrow}
+              title={<span id="why-title">{t.whyTitle}</span>}
+              description={t.whyDescription}
             />
           </div>
           <div className="mt-14 grid gap-px overflow-hidden rounded-2xl bg-slate-200 ring-1 ring-slate-200 sm:grid-cols-2 lg:grid-cols-4">
             {whyChooseUs.map((w, i) => (
               <div key={w.title} data-reveal style={revealDelay(i % 4)} className="bg-white p-6">
-                <p className="font-mono text-xs text-brand-600">{String(i + 1).padStart(2, "0")}</p>
+                <p className="font-mono text-xs text-brand-600">{num(i + 1)}</p>
                 <h3 className="mt-3 font-semibold text-navy-900">{w.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-slate-600">{w.description}</p>
               </div>
             ))}
             <div className="flex flex-col justify-between bg-gradient-to-br from-brand-600 to-accent-600 p-6 text-white">
-              <p className="font-semibold">Let&apos;s discuss your goals.</p>
+              <p className="font-semibold">{t.whyCta}</p>
               <ButtonLink href="/contact" variant="white" size="sm" className="mt-6 self-start">
-                Get in touch
+                {dict.common.getInTouch}
                 <ArrowRight />
               </ButtonLink>
             </div>
@@ -195,12 +201,12 @@ export default function AboutPage() {
 }
 
 /** Abstract architecture illustration — connected layers of a business system */
-function TechVisual() {
+function TechVisual({ layers: l }: { layers: Dictionary["about"]["layers"] }) {
   const layers = [
-    { label: "Users & Channels", items: ["Web", "Mobile", "POS"] },
-    { label: "Business Applications", items: ["Sales", "Finance", "HR", "Inventory"] },
-    { label: "Data & Integration", items: ["Database", "Reports", "APIs"] },
-    { label: "Infrastructure", items: ["Network", "Servers", "Backup"] },
+    { label: l.users, items: ["Web", "Mobile", "POS"] },
+    { label: l.apps, items: ["Sales", "Finance", "HR", "Inventory"] },
+    { label: l.data, items: ["Database", "Reports", "APIs"] },
+    { label: l.infra, items: ["Network", "Servers", "Backup"] },
   ];
   return (
     <div

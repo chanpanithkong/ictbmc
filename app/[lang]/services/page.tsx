@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
+import { getI18n } from "@/lib/i18n/server";
+import { localizedMetadata } from "@/lib/i18n/metadata";
 import { ArrowRight } from "lucide-react";
-import { services } from "@/data/services";
+import { getServices } from "@/lib/i18n/content";
+import { localizeNumber } from "@/lib/i18n/format";
 import { PageHero } from "@/components/shared/page-hero";
 import { IconTile } from "@/components/ui/icon-tile";
 import { CheckList } from "@/components/ui/check-list";
@@ -9,30 +12,30 @@ import { ProcessSection } from "@/components/home/process-section";
 import { CtaSection } from "@/components/shared/cta-section";
 import { cn } from "@/lib/utils";
 
-export const metadata: Metadata = {
-  title: "Services",
-  description:
-    "Custom software development, IT consulting, business management systems, web applications, IT infrastructure, database management, IT support and digital transformation services.",
-  alternates: { canonical: "/services" },
-  openGraph: { title: "Technology Services | ICT BMC", url: "/services" },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { locale, dict } = await getI18n();
+  return localizedMetadata(locale, "/services", { title: dict.meta.servicesTitle, description: dict.meta.servicesDescription });
+}
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const { locale, dict } = await getI18n();
+  const t = dict.services;
+  const services = getServices(locale);
   return (
     <>
       <PageHero
-        eyebrow="Services"
+        eyebrow={t.eyebrow}
         title={
           <>
-            Comprehensive <span className="text-gradient">Technology Services.</span>
+            {t.titleA} <span className="text-gradient">{t.titleHighlight}</span>
           </>
         }
-        description="From strategy and software to infrastructure and support, we provide the technology services organizations need to operate efficiently and grow with confidence."
-        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Services" }]}
+        description={t.description}
+        breadcrumbs={[{ label: dict.nav.home, href: "/" }, { label: dict.nav.services }]}
       />
 
       {/* Quick index */}
-      <nav aria-label="Services on this page" className="sticky top-16 z-30 border-b border-slate-200 bg-white/90 backdrop-blur lg:top-[72px]">
+      <nav aria-label={t.indexAria} className="sticky top-16 z-30 border-b border-slate-200 bg-white/90 backdrop-blur lg:top-[72px]">
         <div className="container-page">
           <ul className="-mx-4 flex gap-1 overflow-x-auto px-4 py-3 [scrollbar-width:none]">
             {services.map((s) => (
@@ -61,7 +64,7 @@ export default function ServicesPage() {
               <div data-reveal className={cn(i % 2 === 1 && "lg:order-2")}>
                 <div className="flex items-center gap-4">
                   <IconTile icon={s.icon} size="lg" />
-                  <span className="font-mono text-sm text-slate-400">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="font-mono text-sm text-slate-400">{localizeNumber(String(i + 1).padStart(2, "0"), locale)}</span>
                 </div>
                 <h2 id={`${s.slug}-title`} className="mt-6 text-3xl font-semibold tracking-tight text-navy-900">
                   {s.title}
@@ -74,7 +77,7 @@ export default function ServicesPage() {
                   size="none"
                   className="mt-6"
                 >
-                  Discuss this service
+                  {t.discuss}
                   <ArrowRight />
                 </ButtonLink>
               </div>
@@ -88,7 +91,7 @@ export default function ServicesPage() {
                   className="absolute -right-16 -bottom-16 size-64 rounded-full bg-brand-600/30 blur-3xl"
                 />
                 <div className="relative">
-                  <p className="eyebrow text-accent-400">What&apos;s included</p>
+                  <p className="eyebrow text-accent-400">{t.included}</p>
                   <CheckList items={s.capabilities} tone="dark" className="mt-6" />
                 </div>
               </div>
@@ -98,7 +101,7 @@ export default function ServicesPage() {
       </div>
 
       <ProcessSection />
-      <CtaSection title="Not sure which service you need?" description="Tell us about your challenge and we'll recommend the right combination of services for your organization." />
+      <CtaSection title={t.ctaTitle} description={t.ctaDescription} />
     </>
   );
 }

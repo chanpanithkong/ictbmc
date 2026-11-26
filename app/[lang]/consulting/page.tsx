@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import { getI18n } from "@/lib/i18n/server";
+import { localizedMetadata } from "@/lib/i18n/metadata";
 import { ArrowRight } from "lucide-react";
-import { consultingServices } from "@/data/consulting";
-import { consultingProcess } from "@/data/process";
+import { getConsultingProcess, getConsultingServices } from "@/lib/i18n/content";
 import { PageHero } from "@/components/shared/page-hero";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { IconTile } from "@/components/ui/icon-tile";
@@ -10,40 +11,40 @@ import { ProcessTimeline } from "@/components/shared/process-timeline";
 import { CtaSection } from "@/components/shared/cta-section";
 import { revealDelay } from "@/lib/utils";
 
-export const metadata: Metadata = {
-  title: "IT Consulting",
-  description:
-    "Expert IT consulting in Cambodia: IT strategy, technology assessment, software selection, system architecture, infrastructure and network planning, cybersecurity assessment and IT project management.",
-  alternates: { canonical: "/consulting" },
-  openGraph: { title: "IT Consulting | ICT BMC", url: "/consulting" },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { locale, dict } = await getI18n();
+  return localizedMetadata(locale, "/consulting", { title: dict.meta.consultingTitle, description: dict.meta.consultingDescription });
+}
 
 const consultHref = `/contact?service=${encodeURIComponent("IT Consulting")}`;
 
-export default function ConsultingPage() {
+export default async function ConsultingPage() {
+  const { locale, dict } = await getI18n();
+  const t = dict.consulting;
+  const consultingServices = getConsultingServices(locale);
   return (
     <>
       <PageHero
-        eyebrow="IT Consulting"
+        eyebrow={t.eyebrow}
         title={
           <>
-            Expert Technology Guidance <span className="text-gradient">for Your Business.</span>
+            {t.titleA} <span className="text-gradient">{t.titleHighlight}</span>
           </>
         }
-        description="We help organizations identify technology opportunities, solve operational challenges, improve IT infrastructure, and implement practical solutions aligned with their business objectives."
+        description={t.description}
         breadcrumbs={[
-          { label: "Home", href: "/" },
-          { label: "Solutions", href: "/solutions" },
-          { label: "IT Consulting" },
+          { label: dict.nav.home, href: "/" },
+          { label: dict.nav.solutions, href: "/solutions" },
+          { label: dict.nav.consulting },
         ]}
         actions={
           <>
             <ButtonLink href={consultHref} size="lg">
-              Discuss Your Technology Needs
+              {t.discussNeeds}
               <ArrowRight />
             </ButtonLink>
             <ButtonLink href="#consulting-process" size="lg" variant="ghostDark">
-              Our process
+              {t.ourProcess}
             </ButtonLink>
           </>
         }
@@ -53,9 +54,9 @@ export default function ConsultingPage() {
         <div className="container-page">
           <div data-reveal>
             <SectionHeading
-              eyebrow="Consulting services"
-              title={<span id="consulting-services-title">How We Can Help.</span>}
-              description="Independent, practical advice across strategy, systems, infrastructure and delivery."
+              eyebrow={t.servicesEyebrow}
+              title={<span id="consulting-services-title">{t.servicesTitle}</span>}
+              description={t.servicesDescription}
             />
           </div>
           <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -85,22 +86,22 @@ export default function ConsultingPage() {
           <div data-reveal>
             <SectionHeading
               tone="dark"
-              eyebrow="Consulting process"
-              title={<span id="consulting-process-title">From Understanding to Ongoing Support.</span>}
-              description="A structured five-step engagement that turns business challenges into practical, implemented solutions."
+              eyebrow={t.processEyebrow}
+              title={<span id="consulting-process-title">{t.processTitle}</span>}
+              description={t.processDescription}
             />
           </div>
           <div className="mt-16">
-            <ProcessTimeline steps={consultingProcess} />
+            <ProcessTimeline steps={getConsultingProcess(locale)} />
           </div>
         </div>
       </section>
 
       <CtaSection
-        title="Discuss Your Technology Needs."
-        description="Share your goals and challenges with us. We will help you understand your options and recommend a practical path forward."
-        primary={{ label: "Discuss Your Technology Needs", href: consultHref }}
-        secondary={{ label: "View Services", href: "/services" }}
+        title={t.ctaTitle}
+        description={t.ctaDescription}
+        primary={{ label: t.discussNeeds, href: consultHref }}
+        secondary={{ label: dict.common.viewServices, href: "/services" }}
       />
     </>
   );

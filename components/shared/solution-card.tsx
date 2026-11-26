@@ -1,9 +1,11 @@
-import Link from "next/link";
+import Link from "@/components/i18n/link";
 import { ArrowUpRight } from "lucide-react";
 import type { Solution } from "@/types";
 import { IconTile } from "@/components/ui/icon-tile";
+import { getI18n } from "@/lib/i18n/server";
 
-export function SolutionCard({ solution }: { solution: Solution }) {
+export async function SolutionCard({ solution }: { solution: Solution }) {
+  const { dict } = await getI18n();
   return (
     <Link
       href={solution.href}
@@ -22,7 +24,7 @@ export function SolutionCard({ solution }: { solution: Solution }) {
       </div>
       <h3 className="mt-5 text-lg font-semibold text-white">{solution.title}</h3>
       <p className="mt-2 text-sm leading-relaxed text-slate-400">{solution.description}</p>
-      <span className="mt-5 text-sm font-medium text-accent-300">Learn more</span>
+      <span className="mt-5 text-sm font-medium text-accent-300">{dict.common.learnMoreShort}</span>
     </Link>
   );
 }

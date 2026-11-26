@@ -1,9 +1,12 @@
-import Link from "next/link";
+import Link from "@/components/i18n/link";
 import { ArrowRight } from "lucide-react";
 import type { Service } from "@/types";
 import { IconTile } from "@/components/ui/icon-tile";
+import { getI18n } from "@/lib/i18n/server";
+import { format } from "@/lib/i18n/format";
 
-export function ServiceCard({ service, index }: { service: Service; index?: number }) {
+export async function ServiceCard({ service, index }: { service: Service; index?: number }) {
+  const { dict } = await getI18n();
   return (
     <article className="group relative flex h-full flex-col rounded-2xl bg-white p-6 ring-1 ring-slate-200 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-brand-900/5 hover:ring-brand-200">
       <div className="flex items-start justify-between">
@@ -20,8 +23,8 @@ export function ServiceCard({ service, index }: { service: Service; index?: numb
         href={`/services#${service.slug}`}
         className="focus-ring mt-5 inline-flex items-center gap-1.5 self-start rounded text-sm font-medium text-brand-600 hover:text-brand-700"
       >
-        Learn More
-        <span className="sr-only"> about {service.title}</span>
+        {dict.common.learnMore}
+        <span className="sr-only"> {format(dict.common.aboutService, { title: service.title })}</span>
         <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
       </Link>
     </article>

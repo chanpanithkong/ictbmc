@@ -1,15 +1,25 @@
 "use client";
 
-import Link from "next/link";
+import Link from "@/components/i18n/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, ChevronDown } from "lucide-react";
-import { mainNav } from "@/data/navigation";
+import { getMainNav } from "@/data/navigation";
 import type { NavItem } from "@/types";
 import { cn } from "@/lib/utils";
+import { isLocale } from "@/lib/i18n/config";
 import { Logo } from "@/components/shared/logo";
 import { ButtonLink } from "@/components/ui/button";
+import { useI18n } from "@/components/i18n/i18n-provider";
+import { LanguageSwitcher } from "@/components/i18n/language-switcher";
 import { MobileMenu } from "./mobile-menu";
+
+/** "/kh/services" -> "/services" */
+export function stripLocale(pathname: string) {
+  const parts = pathname.split("/");
+  if (isLocale(parts[1])) parts.splice(1, 1);
+  return parts.join("/") || "/";
+}
 
 export function isActive(pathname: string, item: NavItem) {
   if (item.href === "/") return pathname === "/";
@@ -18,7 +28,10 @@ export function isActive(pathname: string, item: NavItem) {
 }
 
 export function Navbar() {
-  const pathname = usePathname();
+  const fullPath = usePathname();
+  const pathname = stripLocale(fullPath);
+  const { dict } = useI18n();
+  const mainNav = getMainNav(dict);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -37,10 +50,10 @@ export function Navbar() {
           : "border-b border-transparent bg-transparent",
       )}
     >
-      <div className="container-page flex h-16 items-center justify-between gap-6 lg:h-[72px]">
-        <Logo />
+      <div className="container-page flex h-16 items-center justify-between gap-4 lg:h-[72px]">
+        <Logo label={dict.nav.homeAria} />
 
-        <nav aria-label="Main" className="hidden lg:block">
+        <nav aria-label={dict.nav.mainAria} className="hidden lg:block">
           <ul className="flex items-center gap-1">
             {mainNav.map((item) => (
               <li key={item.href} className="relative">
@@ -67,11 +80,12 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <ButtonLink href="/contact" size="sm" className="hidden sm:inline-flex">
-            Let&apos;s Talk
+          <LanguageSwitcher className="hidden sm:inline-flex" />
+          <ButtonLink href="/contact" size="sm" className="hidden sm:inline-flex lg:hidden xl:inline-flex">
+            {dict.common.letsTalk}
             <ArrowRight />
           </ButtonLink>
-          <MobileMenu key={pathname} pathname={pathname} />
+          <MobileMenu key={fullPath} pathname={pathname} />
         </div>
       </div>
     </header>

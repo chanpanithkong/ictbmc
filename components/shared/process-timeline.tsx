@@ -1,8 +1,11 @@
 import type { ProcessStep } from "@/types";
 import { cn, revealDelay } from "@/lib/utils";
+import { getI18n } from "@/lib/i18n/server";
+import { format, localizeNumber } from "@/lib/i18n/format";
 
 /** Horizontal timeline on large screens, vertical on small screens. */
-export function ProcessTimeline({ steps, tone = "dark" }: { steps: ProcessStep[]; tone?: "dark" | "light" }) {
+export async function ProcessTimeline({ steps, tone = "dark" }: { steps: ProcessStep[]; tone?: "dark" | "light" }) {
+  const { locale, dict } = await getI18n();
   const dark = tone === "dark";
   const cols = steps.length > 5 ? "lg:grid-cols-7" : "lg:grid-cols-5";
   return (
@@ -41,7 +44,7 @@ export function ProcessTimeline({ steps, tone = "dark" }: { steps: ProcessStep[]
             </span>
             <div className="lg:mt-6">
               <p className={cn("font-mono text-xs", dark ? "text-accent-400" : "text-brand-600")}>
-                Step {String(i + 1).padStart(2, "0")}
+                {format(dict.common.step, { n: localizeNumber(String(i + 1).padStart(2, "0"), locale) })}
               </p>
               <h3 className={cn("mt-1 text-base font-semibold", dark ? "text-white" : "text-navy-900")}>
                 {step.title}

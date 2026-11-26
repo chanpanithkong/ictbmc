@@ -1,17 +1,21 @@
 import { AlertTriangle, ArrowRight, CircleCheck, Lightbulb } from "lucide-react";
 import type { Product } from "@/types";
-import { products } from "@/data/products";
 import { PageHero } from "@/components/shared/page-hero";
 import { ProductMockup } from "@/components/shared/product-mockup";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { ButtonLink } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { CtaSection } from "@/components/shared/cta-section";
-import { ProductCard, demoHref } from "./product-card";
-import { revealDelay } from "@/lib/utils";
+import { ProductCard } from "./product-card";
+import { demoHref, revealDelay } from "@/lib/utils";
+import { getI18n } from "@/lib/i18n/server";
+import { getProducts } from "@/lib/i18n/content";
+import { format, localizeNumber } from "@/lib/i18n/format";
 
-export function ProductDetail({ product }: { product: Product }) {
-  const related = products
+export async function ProductDetail({ product }: { product: Product }) {
+  const { locale, dict } = await getI18n();
+  const t = dict.products.detail;
+  const related = getProducts(locale)
     .filter((p) => p.slug !== product.slug)
     .sort((a, b) => Number(b.category === product.category) - Number(a.category === product.category))
     .slice(0, 3);
@@ -24,18 +28,18 @@ export function ProductDetail({ product }: { product: Product }) {
         title={product.headline}
         description={product.description}
         breadcrumbs={[
-          { label: "Home", href: "/" },
-          { label: "Products", href: "/products" },
+          { label: dict.nav.home, href: "/" },
+          { label: dict.nav.products, href: "/products" },
           { label: product.name },
         ]}
         actions={
           <>
-            <ButtonLink href={demoHref(product)} size="lg">
-              Request Demo
+            <ButtonLink href={demoHref(product.slug)} size="lg">
+              {dict.common.requestDemo}
               <ArrowRight />
             </ButtonLink>
             <ButtonLink href="#features" size="lg" variant="ghostDark">
-              View features
+              {t.viewFeatures}
             </ButtonLink>
           </>
         }
@@ -54,9 +58,9 @@ export function ProductDetail({ product }: { product: Product }) {
       <section className="bg-white py-20 sm:py-24" aria-labelledby="overview-title">
         <div className="container-page grid gap-10 lg:grid-cols-[1fr_1.3fr] lg:items-start">
           <div data-reveal>
-            <SectionHeading eyebrow="Overview" title={<span id="overview-title">Product Overview</span>} />
+            <SectionHeading eyebrow={t.overviewEyebrow} title={<span id="overview-title">{t.overviewTitle}</span>} />
             <div className="mt-6 flex flex-wrap gap-2">
-              <Badge>{product.category}</Badge>
+              <Badge>{dict.products.categories[product.category]}</Badge>
               {product.highlights.map((h) => (
                 <Badge key={h} variant="outline">
                   {h}
@@ -66,23 +70,19 @@ export function ProductDetail({ product }: { product: Product }) {
           </div>
           <div data-reveal className="space-y-4 text-lg leading-relaxed text-slate-600">
             <p>{product.description}</p>
-            <p className="text-base">
-              The {product.name} is configured to your organization during implementation, with optional
-              customization and integration with your existing tools. ICT BMC provides onboarding, training
-              and ongoing technical support.
-            </p>
+            <p className="text-base">{format(t.configured, { name: product.name })}</p>
           </div>
         </div>
       </section>
 
       {/* 3 & 4. Challenges + solution */}
-      <section className="bg-surface py-20 sm:py-24" aria-label="Business challenges and solution">
+      <section className="bg-surface py-20 sm:py-24" aria-label={t.challengesAria}>
         <div className="container-page grid gap-6 lg:grid-cols-2">
           <div data-reveal className="rounded-3xl bg-white p-8 ring-1 ring-slate-200 sm:p-10">
             <span className="inline-flex size-11 items-center justify-center rounded-xl bg-amber-50 text-amber-600 ring-1 ring-amber-100">
               <AlertTriangle className="size-5" aria-hidden />
             </span>
-            <h2 className="mt-6 text-2xl font-semibold text-navy-900">Business Challenges</h2>
+            <h2 className="mt-6 text-2xl font-semibold text-navy-900">{t.challenges}</h2>
             <ul className="mt-6 space-y-4">
               {product.challenges.map((c) => (
                 <li key={c} className="flex gap-3 text-slate-600">
@@ -102,7 +102,7 @@ export function ProductDetail({ product }: { product: Product }) {
               <span className="inline-flex size-11 items-center justify-center rounded-xl bg-brand-600/25 text-accent-300 ring-1 ring-white/10">
                 <Lightbulb className="size-5" aria-hidden />
               </span>
-              <h2 className="mt-6 text-2xl font-semibold text-white">Our Solution</h2>
+              <h2 className="mt-6 text-2xl font-semibold text-white">{t.solution}</h2>
               <p className="mt-6 text-lg leading-relaxed text-slate-300">{product.solution}</p>
             </div>
           </div>
@@ -114,8 +114,8 @@ export function ProductDetail({ product }: { product: Product }) {
         <div className="container-page">
           <div data-reveal>
             <SectionHeading
-              eyebrow="Key features"
-              title={<span id="features-title">Everything You Need in One Platform.</span>}
+              eyebrow={t.featuresEyebrow}
+              title={<span id="features-title">{t.featuresTitle}</span>}
             />
           </div>
           <ul className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -126,7 +126,7 @@ export function ProductDetail({ product }: { product: Product }) {
                 style={revealDelay(i % 4)}
                 className="flex items-center gap-3 rounded-xl bg-surface px-4 py-4 ring-1 ring-slate-200/70"
               >
-                <span className="font-mono text-xs text-brand-600">{String(i + 1).padStart(2, "0")}</span>
+                <span className="font-mono text-xs text-brand-600">{localizeNumber(String(i + 1).padStart(2, "0"), locale)}</span>
                 <span className="text-sm font-medium text-navy-900">{f}</span>
               </li>
             ))}
@@ -139,8 +139,8 @@ export function ProductDetail({ product }: { product: Product }) {
         <div className="container-page">
           <div data-reveal>
             <SectionHeading
-              eyebrow="Benefits"
-              title={<span id="benefits-title">What It Means for Your Business.</span>}
+              eyebrow={t.benefitsEyebrow}
+              title={<span id="benefits-title">{t.benefitsTitle}</span>}
             />
           </div>
           <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -167,9 +167,9 @@ export function ProductDetail({ product }: { product: Product }) {
             <SectionHeading
               tone="dark"
               align="center"
-              eyebrow="UI preview"
-              title={<span id="preview-title">Designed for Everyday Use.</span>}
-              description="A clean, intuitive interface that your team can learn quickly. Preview shown with sample data."
+              eyebrow={t.previewEyebrow}
+              title={<span id="preview-title">{t.previewTitle}</span>}
+              description={t.previewDescription}
             />
           </div>
           <div data-reveal className="relative mx-auto mt-14 max-w-4xl">
@@ -178,7 +178,7 @@ export function ProductDetail({ product }: { product: Product }) {
               className="absolute -inset-10 -z-10 rounded-full bg-gradient-to-tr from-brand-600/30 to-accent-500/20 blur-3xl"
             />
             <ProductMockup product={product} />
-            <ul className="mt-8 flex flex-wrap justify-center gap-2" aria-label="Modules">
+            <ul className="mt-8 flex flex-wrap justify-center gap-2" aria-label={t.modulesAria}>
               {product.mockup.modules.map((m) => (
                 <li key={m}>
                   <Badge variant="dark">{m}</Badge>
@@ -193,7 +193,7 @@ export function ProductDetail({ product }: { product: Product }) {
       <section className="bg-white py-20 sm:py-24" aria-labelledby="workflow-title">
         <div className="container-page">
           <div data-reveal>
-            <SectionHeading eyebrow="Workflow" title={<span id="workflow-title">How It Works.</span>} />
+            <SectionHeading eyebrow={t.workflowEyebrow} title={<span id="workflow-title">{t.workflowTitle}</span>} />
           </div>
           <ol className="mt-12 grid gap-4 md:grid-cols-5">
             {product.workflow.map((step, i) => (
@@ -204,7 +204,7 @@ export function ProductDetail({ product }: { product: Product }) {
                 className="relative rounded-2xl bg-surface p-6 ring-1 ring-slate-200/70"
               >
                 <span className="inline-flex size-9 items-center justify-center rounded-full bg-gradient-to-br from-brand-600 to-accent-500 text-sm font-semibold text-white">
-                  {i + 1}
+                  {localizeNumber(i + 1, locale)}
                 </span>
                 <h3 className="mt-4 font-semibold text-navy-900">{step.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-slate-600">{step.description}</p>
@@ -222,19 +222,19 @@ export function ProductDetail({ product }: { product: Product }) {
 
       {/* 9. CTA */}
       <CtaSection
-        title={`See the ${product.name} in action.`}
-        description="Request a personalized demo and we will walk you through the features that matter most to your business."
-        primary={{ label: "Request Demo", href: demoHref(product) }}
-        secondary={{ label: "All Products", href: "/products" }}
+        title={format(t.ctaTitle, { name: product.name })}
+        description={t.ctaDescription}
+        primary={{ label: dict.common.requestDemo, href: demoHref(product.slug) }}
+        secondary={{ label: dict.common.allProducts, href: "/products" }}
       />
 
       {/* Related */}
       <section className="bg-surface py-20 sm:py-24" aria-labelledby="related-title">
         <div className="container-page">
-          <SectionHeading eyebrow="Explore more" title={<span id="related-title">Related Products</span>} />
+          <SectionHeading eyebrow={t.relatedEyebrow} title={<span id="related-title">{t.relatedTitle}</span>} />
           <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {related.map((p) => (
-              <ProductCard key={p.slug} product={p} />
+              <ProductCard key={p.slug} slug={p.slug} />
             ))}
           </div>
         </div>

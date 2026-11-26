@@ -4,7 +4,10 @@ import { useRef, useState, type FormEvent } from "react";
 import { useSearchParams } from "next/navigation";
 import { ChevronDown, CircleAlert, CircleCheck, Info, LoaderCircle, Send } from "lucide-react";
 import { contactFormConfig, contactServiceOptions } from "@/data/company";
-import { getProduct } from "@/data/products";
+import { getProduct } from "@/lib/i18n/content";
+import { format, localizeNumber } from "@/lib/i18n/format";
+import { useI18n } from "@/components/i18n/i18n-provider";
+import type { Dictionary } from "@/lib/i18n/dictionaries";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
@@ -22,25 +25,29 @@ type Status = "idle" | "loading" | "success" | "error";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const PHONE_RE = /^[+()\-.\s\d]{6,20}$/;
 
-function validate(v: Fields): Errors {
+type ErrorMessages = Dictionary["contact"]["form"]["errors"];
+
+function validate(v: Fields, m: ErrorMessages): Errors {
   const e: Errors = {};
-  if (!v.fullName.trim()) e.fullName = "Please enter your full name.";
-  else if (v.fullName.trim().length < 2) e.fullName = "Name must be at least 2 characters.";
-  if (!v.email.trim()) e.email = "Please enter your email address.";
-  else if (!EMAIL_RE.test(v.email.trim())) e.email = "Please enter a valid email address (e.g. name@company.com).";
-  if (v.phone.trim() && !PHONE_RE.test(v.phone.trim())) e.phone = "Please enter a valid phone number.";
-  if (!v.service) e.service = "Please select a service category.";
-  if (!v.message.trim()) e.message = "Please tell us a little about your needs.";
-  else if (v.message.trim().length < 10) e.message = "Message must be at least 10 characters.";
-  else if (v.message.length > 2000) e.message = "Message must be 2,000 characters or fewer.";
+  if (!v.fullName.trim()) e.fullName = m.nameRequired;
+  else if (v.fullName.trim().length < 2) e.fullName = m.nameShort;
+  if (!v.email.trim()) e.email = m.emailRequired;
+  else if (!EMAIL_RE.test(v.email.trim())) e.email = m.emailInvalid;
+  if (v.phone.trim() && !PHONE_RE.test(v.phone.trim())) e.phone = m.phoneInvalid;
+  if (!v.service) e.service = m.serviceRequired;
+  if (!v.message.trim()) e.message = m.messageRequired;
+  else if (v.message.trim().length < 10) e.message = m.messageShort;
+  else if (v.message.length > 2000) e.message = m.messageLong;
   return e;
 }
 
 const fieldOrder: (keyof Fields)[] = ["fullName", "company", "email", "phone", "service", "message"];
 
 export function ContactForm() {
+  const { locale, dict } = useI18n();
+  const f = dict.contact.form;
   const params = useSearchParams();
-  const product = getProduct(params.get("product") ?? "");
+  const product = getProduct(locale, params.get("product") ?? "");
   const presetService = params.get("service") ?? "";
 
   const initial: Fields = {
@@ -49,7 +56,7 @@ export function ContactForm() {
     email: "",
     phone: "",
     service: (contactServiceOptions as readonly string[]).includes(presetService) ? presetService : "",
-    message: product ? `I'd like to request a demo of the ${product.name}.` : "",
+    message: product ? format(dict.products.detail.demoMessage, { name: product.name }) : "",
   };
 
   const [values, setValues] = useState<Fields>(initial);
@@ -62,17 +69,17 @@ export function ContactForm() {
   const update = (name: keyof Fields, value: string) => {
     const next = { ...values, [name]: value };
     setValues(next);
-    if (touched[name]) setErrors(validate(next));
+    if (touched[name]) setErrors(validate(next, f.errors));
   };
 
   const blur = (name: keyof Fields) => {
     setTouched((t) => ({ ...t, [name]: true }));
-    setErrors(validate(values));
+    setErrors(validate(values, f.errors));
   };
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
-    const errs = validate(values);
+    const errs = validate(values, f.errors);
     setErrors(errs);
     setTouched(Object.fromEntries(fieldOrder.map((k) => [k, true])));
     const firstInvalid = fieldOrder.find((k) => errs[k]);
@@ -123,27 +130,26 @@ export function ContactForm() {
           <CircleCheck className="size-7" aria-hidden />
         </span>
         <h2 className="mt-6 text-2xl font-semibold text-navy-900">
-          Thank you, {values.fullName.trim().split(" ")[0]}!
+          {format(f.thanks, { name: values.fullName.trim().split(" ")[0] })}
         </h2>
         {isDemo ? (
           <>
-            <p className="mt-3 leading-relaxed text-slate-600">Your form passed validation successfully.</p>
+            <p className="mt-3 leading-relaxed text-slate-600">{f.validated}</p>
             <p className="mx-auto mt-6 flex max-w-md gap-3 rounded-xl bg-amber-50 p-4 text-left text-sm leading-relaxed text-amber-900 ring-1 ring-amber-200">
               <Info className="mt-0.5 size-4 shrink-0 text-amber-600" aria-hidden />
               <span>
-                <strong className="font-semibold">Demo mode:</strong> this website is a frontend-only demo, so your
-                message was <strong className="font-semibold">not sent</strong> to a server. Please contact ICT BMC
-                directly using the details on this page.
+                <strong className="font-semibold">{f.demoModeStrong}</strong> {f.demoModeA}{" "}
+                <strong className="font-semibold">{f.demoModeNotSent}</strong> {f.demoModeB}
               </span>
             </p>
           </>
         ) : (
           <p className="mt-3 leading-relaxed text-slate-600">
-            Your message has been received. Our team will get back to you as soon as possible.
+            {f.received}
           </p>
         )}
         <Button variant="secondary" className="mt-8" onClick={reset}>
-          Send another message
+          {f.sendAnother}
         </Button>
       </div>
     );
@@ -176,13 +182,14 @@ export function ContactForm() {
     <form
       ref={formRef}
       noValidate
+      method="post"
       onSubmit={onSubmit}
       aria-busy={loading}
       className="rounded-3xl bg-white p-6 ring-1 ring-slate-200 sm:p-10"
     >
-      <h2 className="text-2xl font-semibold text-navy-900">Send us a message</h2>
+      <h2 className="text-2xl font-semibold text-navy-900">{f.title}</h2>
       <p className="mt-2 text-sm text-slate-600">
-        Fields marked <span className="text-rose-600">*</span> are required.
+        {f.requiredA} <span className="text-rose-600">*</span> {f.requiredB}
       </p>
 
       {status === "error" && (
@@ -193,15 +200,15 @@ export function ContactForm() {
           className="mt-6 flex gap-3 rounded-xl bg-rose-50 p-4 text-sm text-rose-900 ring-1 ring-rose-200 outline-none"
         >
           <CircleAlert className="mt-0.5 size-4 shrink-0 text-rose-600" aria-hidden />
-          Something went wrong while sending your message. Please try again, or contact us directly.
+          {f.sendError}
         </div>
       )}
 
       <fieldset disabled={loading} className="mt-8 grid gap-6 sm:grid-cols-2">
-        <legend className="sr-only">Your details</legend>
+        <legend className="sr-only">{f.detailsLegend}</legend>
         <div>
           <label htmlFor="fullName" className="text-sm font-medium text-navy-900">
-            Full Name <span className="text-rose-600">*</span>
+            {f.fullName} <span className="text-rose-600">*</span>
           </label>
           <input
             id="fullName"
@@ -218,7 +225,7 @@ export function ContactForm() {
         </div>
         <div>
           <label htmlFor="company" className="text-sm font-medium text-navy-900">
-            Company Name
+            {f.company}
           </label>
           <input
             id="company"
@@ -232,7 +239,7 @@ export function ContactForm() {
         </div>
         <div>
           <label htmlFor="email" className="text-sm font-medium text-navy-900">
-            Email <span className="text-rose-600">*</span>
+            {f.email} <span className="text-rose-600">*</span>
           </label>
           <input
             id="email"
@@ -251,7 +258,7 @@ export function ContactForm() {
         </div>
         <div>
           <label htmlFor="phone" className="text-sm font-medium text-navy-900">
-            Phone Number
+            {f.phone}
           </label>
           <input
             id="phone"
@@ -269,7 +276,7 @@ export function ContactForm() {
         </div>
         <div className="sm:col-span-2">
           <label htmlFor="service" className="text-sm font-medium text-navy-900">
-            Service Category <span className="text-rose-600">*</span>
+            {f.service} <span className="text-rose-600">*</span>
           </label>
           <div className="relative">
           <select
@@ -283,11 +290,11 @@ export function ContactForm() {
             {...aria("service")}
           >
             <option value="" disabled>
-              Select a service…
+              {f.selectService}
             </option>
             {contactServiceOptions.map((o) => (
               <option key={o} value={o} className="text-navy-900">
-                {o}
+                {dict.contact.serviceOptions[o]}
               </option>
             ))}
           </select>
@@ -298,10 +305,10 @@ export function ContactForm() {
         <div className="sm:col-span-2">
           <div className="flex items-baseline justify-between">
             <label htmlFor="message" className="text-sm font-medium text-navy-900">
-              Message <span className="text-rose-600">*</span>
+              {f.message} <span className="text-rose-600">*</span>
             </label>
             <span className={cn("text-xs", values.message.length > 2000 ? "text-rose-600" : "text-slate-400")}>
-              {values.message.length}/2000
+              {localizeNumber(values.message.length, locale)}/{localizeNumber(2000, locale)}
             </span>
           </div>
           <textarea
@@ -312,7 +319,7 @@ export function ContactForm() {
             value={values.message}
             onChange={(e) => update("message", e.target.value)}
             onBlur={() => blur("message")}
-            placeholder="Tell us about your business, your challenges and what you would like to achieve."
+            placeholder={f.messagePlaceholder}
             className={cn(inputCls("message"), "resize-y py-3")}
             {...aria("message")}
           />
@@ -324,7 +331,7 @@ export function ContactForm() {
         {isDemo ? (
           <p className="flex items-start gap-2 text-xs leading-relaxed text-slate-500">
             <Info className="mt-0.5 size-3.5 shrink-0" aria-hidden />
-            Demo form: submissions are validated in your browser only and are not sent to a server.
+            {f.demoNote}
           </p>
         ) : (
           <span />
@@ -333,18 +340,18 @@ export function ContactForm() {
           {loading ? (
             <>
               <LoaderCircle className="animate-spin" aria-hidden />
-              Sending…
+              {f.sending}
             </>
           ) : (
             <>
-              Send Message
+              {f.submit}
               <Send aria-hidden />
             </>
           )}
         </Button>
       </div>
       <p className="sr-only" aria-live="polite">
-        {loading ? "Sending your message…" : ""}
+        {loading ? f.sendingSr : ""}
       </p>
     </form>
   );

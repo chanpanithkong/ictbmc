@@ -3,8 +3,10 @@
 import { useEffect, useState } from "react";
 import { ArrowUp } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/components/i18n/i18n-provider";
 
 export function BackToTop() {
+  const { dict } = useI18n();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -17,7 +19,7 @@ export function BackToTop() {
   return (
     <button
       type="button"
-      aria-label="Back to top"
+      aria-label={dict.nav.backToTop}
       tabIndex={visible ? 0 : -1}
       aria-hidden={!visible}
       onClick={() => {

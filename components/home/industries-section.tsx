@@ -1,18 +1,22 @@
-import { industries } from "@/data/industries";
+import { getI18n } from "@/lib/i18n/server";
+import { getIndustries } from "@/lib/i18n/content";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { IconTile } from "@/components/ui/icon-tile";
 import { revealDelay } from "@/lib/utils";
 
-export function IndustriesSection() {
+export async function IndustriesSection() {
+  const { locale, dict } = await getI18n();
+  const h = dict.home;
+  const industries = getIndustries(locale);
   return (
     <section className="bg-surface py-24 sm:py-28" aria-labelledby="industries-title">
       <div className="container-page">
         <div data-reveal>
           <SectionHeading
             align="center"
-            eyebrow="Industries"
-            title={<span id="industries-title">Industries We Can Support.</span>}
-            description="Our solutions are designed to adapt to the needs of organizations across a wide range of sectors."
+            eyebrow={h.industriesEyebrow}
+            title={<span id="industries-title">{h.industriesTitle}</span>}
+            description={h.industriesDescription}
           />
         </div>
         <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

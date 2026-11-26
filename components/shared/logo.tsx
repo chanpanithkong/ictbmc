@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/i18n/link";
 import { cn } from "@/lib/utils";
 
 export function LogoMark({ className }: { className?: string }) {
@@ -17,11 +17,19 @@ export function LogoMark({ className }: { className?: string }) {
   );
 }
 
-export function Logo({ tone = "dark", className }: { tone?: "dark" | "light"; className?: string }) {
+export function Logo({
+  tone = "dark",
+  className,
+  label = "ICT BMC — Home",
+}: {
+  tone?: "dark" | "light";
+  className?: string;
+  label?: string;
+}) {
   return (
     <Link
       href="/"
-      aria-label="ICT BMC — Home"
+      aria-label={label}
       className={cn("focus-ring inline-flex items-center gap-2.5 rounded-md", className)}
     >
       <LogoMark />
