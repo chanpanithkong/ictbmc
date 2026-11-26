@@ -94,6 +94,7 @@ export function Navbar() {
 
 function DropdownItem({ item, active, pathname }: { item: NavItem; active: boolean; pathname: string }) {
   const [open, setOpen] = useState(false);
+  const menuId = `nav-menu${item.href.replace(/\//g, "-")}`;
   const ref = useRef<HTMLDivElement>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -143,7 +144,7 @@ function DropdownItem({ item, active, pathname }: { item: NavItem; active: boole
       <button
         type="button"
         aria-expanded={open}
-        aria-controls="nav-solutions-menu"
+        aria-controls={menuId}
         onClick={() => setOpen((v) => !v)}
         className={cn(
           "focus-ring relative inline-flex items-center gap-1 rounded-full px-3.5 py-2 text-sm font-medium transition-colors",
@@ -155,7 +156,7 @@ function DropdownItem({ item, active, pathname }: { item: NavItem; active: boole
         {active && <span aria-hidden className="absolute inset-x-3.5 -bottom-0.5 h-px bg-accent-400" />}
       </button>
       <div
-        id="nav-solutions-menu"
+        id={menuId}
         className={cn(
           "absolute top-full left-1/2 w-80 -translate-x-1/2 pt-3 transition-all duration-200",
           open ? "visible translate-y-0 opacity-100" : "invisible -translate-y-1 opacity-0",

@@ -6,7 +6,14 @@ export function getMainNav(d: Dictionary): NavItem[] {
   return [
     { label: d.nav.home, href: "/" },
     { label: d.nav.about, href: "/about" },
-    { label: d.nav.services, href: "/services" },
+    {
+      label: d.nav.services,
+      href: "/services",
+      children: [
+        { label: d.nav.allServices, href: "/services", description: d.nav.allServicesDesc },
+        { label: d.nav.websites, href: "/websites", description: d.nav.websitesDesc },
+      ],
+    },
     {
       label: d.nav.solutions,
       href: "/solutions",
@@ -31,6 +38,7 @@ export function getFooterNav(d: Dictionary) {
     ],
     solutions: [
       { label: d.nav.consulting, href: "/consulting" },
+      { label: d.nav.websites, href: "/websites" },
       { label: d.footer.softwareDevelopment, href: "/services#custom-software-development" },
       { label: d.footer.businessSystems, href: "/services#business-management-systems" },
       { label: d.footer.itSupport, href: "/services#it-support-maintenance" },

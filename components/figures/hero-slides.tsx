@@ -26,7 +26,8 @@ export type HeroPage =
   | "products"
   | "consulting"
   | "projects"
-  | "contact";
+  | "contact"
+  | "websites";
 
 type FigureKey =
   | "dashboard"
@@ -50,6 +51,7 @@ const pageSlides: Record<HeroPage, FigureKey[]> = {
   consulting: ["roadmap", "security", "analytics"],
   projects: ["devices", "code", "dashboard"],
   contact: ["chat", "map", "devices"],
+  websites: ["devices", "code", "analytics"],
 };
 
 const showcaseProducts = ["restaurant-management-system", "pos-inventory-management-system", "hotel-management-system"];

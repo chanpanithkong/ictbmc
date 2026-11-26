@@ -7,7 +7,9 @@ import { format, localizeNumber } from "@/lib/i18n/format";
 export async function ProcessTimeline({ steps, tone = "dark" }: { steps: ProcessStep[]; tone?: "dark" | "light" }) {
   const { locale, dict } = await getI18n();
   const dark = tone === "dark";
-  const cols = steps.length > 5 ? "lg:grid-cols-7" : "lg:grid-cols-5";
+  // Static class names so Tailwind can detect them
+  const colsByCount: Record<number, string> = { 4: "lg:grid-cols-4", 5: "lg:grid-cols-5", 6: "lg:grid-cols-6", 7: "lg:grid-cols-7" };
+  const cols = colsByCount[steps.length] ?? "lg:grid-cols-5";
   return (
     <ol className={cn("relative grid lg:gap-6", cols)}>
       <span

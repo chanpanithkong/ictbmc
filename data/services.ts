@@ -58,18 +58,19 @@ export const services: Service[] = [
   },
   {
     slug: "web-application-development",
-    title: "Web Application Development",
+    title: "Website & Web Application Development",
     description:
-      "Develop modern, responsive, scalable, and user-friendly web applications.",
+      "Design and build professional websites and modern, responsive web applications for your business.",
     icon: Globe,
     details:
-      "Fast, secure and responsive web applications and portals that work seamlessly across desktop, tablet and mobile — built with modern, proven frameworks.",
+      "From company websites and online stores to customer portals and business dashboards — fast, secure, bilingual and mobile-friendly, built with modern, proven technology.",
     capabilities: [
-      "Business portals & dashboards",
-      "Responsive corporate websites",
-      "Customer self-service applications",
-      "Performance & accessibility best practices",
+      "Business & company websites",
+      "Online stores & booking websites",
+      "Customer portals & business dashboards",
+      "Bilingual Khmer–English, mobile-first design",
     ],
+    link: "/websites",
   },
   {
     slug: "it-infrastructure-networking",

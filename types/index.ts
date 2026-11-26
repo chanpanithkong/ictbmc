@@ -15,6 +15,8 @@ export interface Service {
   /** Longer copy used on the Services page */
   details: string;
   capabilities: string[];
+  /** Optional dedicated page for this service (e.g. /websites) */
+  link?: string;
 }
 
 export interface Solution {

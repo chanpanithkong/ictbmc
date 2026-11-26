@@ -20,7 +20,7 @@ export async function ServiceCard({ service, index }: { service: Service; index?
       <h3 className="mt-5 text-lg font-semibold text-navy-900">{service.title}</h3>
       <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-600">{service.description}</p>
       <Link
-        href={`/services#${service.slug}`}
+        href={service.link ?? `/services#${service.slug}`}
         className="focus-ring mt-5 inline-flex items-center gap-1.5 self-start rounded text-sm font-medium text-brand-600 hover:text-brand-700"
       >
         {dict.common.learnMore}

@@ -57,6 +57,19 @@ export const projects: Project[] = [
     visual: "web",
   },
   {
+    slug: "demo-bilingual-business-website",
+    title: "Bilingual Business Website",
+    category: "Web Applications",
+    description:
+      "Concept for a Khmer–English company website with service pages, news and an enquiry form.",
+    details:
+      "A sample website project showing a mobile-first, bilingual company website with easy content editing, search engine setup, Google Maps, Telegram and Facebook links, and a lead enquiry form.",
+    stack: ["Next.js", "Tailwind CSS", "CMS", "SEO"],
+    status: "Prototype",
+    isDemo: true,
+    visual: "web",
+  },
+  {
     slug: "demo-office-network-upgrade",
     title: "Office Network Upgrade Plan",
     category: "IT Infrastructure",

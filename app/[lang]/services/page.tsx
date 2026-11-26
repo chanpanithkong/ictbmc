@@ -73,15 +73,22 @@ export default async function ServicesPage() {
                 </h2>
                 <p className="mt-4 text-lg leading-relaxed text-slate-600">{s.description}</p>
                 <p className="mt-4 leading-relaxed text-slate-600">{s.details}</p>
-                <ButtonLink
-                  href={`/contact?service=${encodeURIComponent(contactCategory(s.slug))}`}
-                  variant="link"
-                  size="none"
-                  className="mt-6"
-                >
-                  {t.discuss}
-                  <ArrowRight />
-                </ButtonLink>
+                <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+                  {s.link && (
+                    <ButtonLink href={s.link} size="sm">
+                      {t.viewWebsites}
+                      <ArrowRight />
+                    </ButtonLink>
+                  )}
+                  <ButtonLink
+                    href={`/contact?service=${encodeURIComponent(contactCategory(s.slug))}`}
+                    variant="link"
+                    size="none"
+                  >
+                    {t.discuss}
+                    <ArrowRight />
+                  </ButtonLink>
+                </div>
               </div>
               <div
                 data-reveal
