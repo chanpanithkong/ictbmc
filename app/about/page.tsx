@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ArrowRight, Eye, Target } from "lucide-react";
+import { ArrowRight, Eye, MapPin, Target } from "lucide-react";
 import { company } from "@/data/company";
 import { approach, coreValues, mission, vision, whoWeAre, whyChooseUs } from "@/data/about";
 import { PageHero } from "@/components/shared/page-hero";
@@ -54,6 +54,17 @@ export default function AboutPage() {
                 {p}
               </p>
             ))}
+            <div className="mt-8 flex gap-4 rounded-2xl bg-surface p-5 ring-1 ring-slate-200">
+              <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600 ring-1 ring-brand-100">
+                <MapPin className="size-[18px]" aria-hidden />
+              </span>
+              <div>
+                <p className="font-semibold text-navy-900">
+                  What does <span className="text-brand-600">BMC</span> stand for?
+                </p>
+                <p className="mt-1 text-sm leading-relaxed text-slate-600">{company.nameMeaning}</p>
+              </div>
+            </div>
           </div>
           <div data-reveal className="relative">
             <TechVisual />

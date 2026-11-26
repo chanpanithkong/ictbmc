@@ -9,9 +9,9 @@ import { IndustriesSection } from "@/components/home/industries-section";
 import { CtaSection } from "@/components/shared/cta-section";
 
 export const metadata: Metadata = {
-  title: { absolute: "ICT BMC — Software Development & IT Consulting in Cambodia" },
+  title: { absolute: "ICT BMC — Software Development & IT Consulting in Banteay Meanchey, Cambodia" },
   description:
-    "ICT BMC designs, develops and delivers technology solutions — custom software, business management systems, IT consulting, infrastructure and support — that help businesses grow with confidence.",
+    "ICT BMC, a technology company in Banteay Meanchey Province, designs, develops and delivers custom software, business management systems, IT consulting, infrastructure and support that help businesses grow with confidence.",
   alternates: { canonical: "/" },
 };
 

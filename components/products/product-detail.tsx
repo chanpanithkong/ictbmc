@@ -123,7 +123,7 @@ export function ProductDetail({ product }: { product: Product }) {
               <li
                 key={f}
                 data-reveal
-                style={revealDelay(i % 4, 50)}
+                style={revealDelay(i % 4)}
                 className="flex items-center gap-3 rounded-xl bg-surface px-4 py-4 ring-1 ring-slate-200/70"
               >
                 <span className="font-mono text-xs text-brand-600">{String(i + 1).padStart(2, "0")}</span>

@@ -17,6 +17,12 @@ export const company = {
     "Our goal is to deliver practical, scalable, user-friendly, and innovative technology solutions based on our clients' business needs.",
   ],
   country: "Cambodia",
+  countryCode: "KH",
+  /** "BMC" stands for Banteay Meanchey Province */
+  province: "Banteay Meanchey",
+  location: "Banteay Meanchey Province, Cambodia",
+  nameMeaning:
+    "The name ICT BMC reflects our home in Banteay Meanchey (BMC) Province, Cambodia — bringing modern information and communication technology to businesses and organizations in the province and across the country.",
 } as const;
 
 export interface ContactChannel {
@@ -33,11 +39,20 @@ export const contact = {
   /** International format without "+" or spaces, e.g. "85512345678" */
   whatsapp: "",
   /** Full office address */
-  address: "",
+  address: "HXQC+JJM, Serei Saophoan, Banteay Meanchey Province, Cambodia",
   /** Opening hours, e.g. "Mon – Fri, 8:00 – 17:00" */
   hours: "",
-  /** Google Maps embed URL (https://www.google.com/maps/embed?...) */
-  mapEmbedUrl: "",
+};
+
+/** Office location — the map on the Contact page and structured data use this */
+const office = { lat: 13.5890535, lng: 102.9715752, zoom: 17 };
+
+export const officeLocation = {
+  ...office,
+  plusCode: "HXQC+JJM",
+  locality: "Serei Saophoan",
+  embedUrl: `https://www.google.com/maps?q=${office.lat},${office.lng}&z=${office.zoom}&hl=en&output=embed`,
+  linkUrl: `https://www.google.com/maps/search/?api=1&query=${office.lat},${office.lng}`,
 };
 
 export const socialLinks: { label: string; href: string; icon: "facebook" | "linkedin" | "telegram" | "youtube" }[] = [
@@ -72,6 +87,9 @@ export const contactServiceOptions = [
 
 export const seoKeywords = [
   "ICT BMC",
+  "IT Company Banteay Meanchey",
+  "Software Development Banteay Meanchey",
+  "IT Support Banteay Meanchey",
   "Software Development Cambodia",
   "IT Consulting Cambodia",
   "IT Support Cambodia",

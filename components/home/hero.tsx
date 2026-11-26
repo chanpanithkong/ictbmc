@@ -21,7 +21,7 @@ export function Hero() {
         <div>
           <p className="inline-flex items-center gap-2 rounded-full bg-white/5 py-1 pr-3 pl-1 text-xs font-medium text-slate-300 ring-1 ring-white/10">
             <span className="shrink-0 rounded-full bg-brand-600 px-2 py-0.5 text-[11px] whitespace-nowrap text-white">ICT BMC</span>
-            Your Trusted Technology Partner for Business Growth
+            Technology partner from Banteay Meanchey, Cambodia
           </p>
           <h1 className="mt-7 text-4xl font-semibold tracking-tight text-balance text-white sm:text-5xl lg:text-6xl lg:leading-[1.05]">
             Technology That <span className="text-gradient">Empowers</span> Your Business.

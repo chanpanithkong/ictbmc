@@ -16,7 +16,8 @@ npm run lint
 | What | Where |
 | --- | --- |
 | Production URL (used for canonical URLs, sitemap, robots, Open Graph) | `NEXT_PUBLIC_SITE_URL` env var, e.g. `https://www.example.com` |
-| Email, phone, WhatsApp, address, hours, map embed | `data/company.ts` → `contact` |
+| Email, phone, WhatsApp, address, hours | `data/company.ts` → `contact` |
+| Office map pin (latitude/longitude, plus code) | `data/company.ts` → `officeLocation` |
 | Social media links | `data/company.ts` → `socialLinks` |
 | Contact form behaviour | `data/company.ts` → `contactFormConfig` |
 

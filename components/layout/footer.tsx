@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Suspense } from "react";
+import { MapPin } from "lucide-react";
 import { company, socialLinks } from "@/data/company";
 import { footerNav } from "@/data/navigation";
 import { Logo } from "@/components/shared/logo";
@@ -23,6 +24,10 @@ export function Footer() {
         <div className="lg:col-span-4">
           <Logo />
           <p className="mt-5 max-w-xs text-sm leading-relaxed">{company.tagline}</p>
+          <p className="mt-3 flex items-center gap-2 text-sm text-slate-300">
+            <MapPin className="size-4 shrink-0 text-accent-400" aria-hidden />
+            {company.location}
+          </p>
           <ul className="mt-6 flex gap-2" aria-label="Social media">
             {socialLinks.map((s) =>
               s.href ? (

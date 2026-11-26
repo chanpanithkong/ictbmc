@@ -11,7 +11,7 @@ export function absoluteUrl(path = "/") {
   return `${base}${path.startsWith("/") ? path : `/${path}`}`;
 }
 
-/** Inline style for staggered scroll-reveal delays */
-export function revealDelay(index: number, step = 70) {
-  return { "--reveal-delay": `${Math.min(index * step, 420)}ms` } as React.CSSProperties;
+/** Inline style that staggers scroll-reveal animations within a row */
+export function revealDelay(index: number, step = 1) {
+  return { "--reveal-step": Math.min(index * step, 6) } as React.CSSProperties;
 }

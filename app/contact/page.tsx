@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { Clock, Mail, MapPin, MessageCircle, Phone, type LucideIcon } from "lucide-react";
-import { contact } from "@/data/company";
+import { ArrowUpRight, Clock, Mail, MapPin, MessageCircle, Phone, type LucideIcon } from "lucide-react";
+import { company, contact, officeLocation } from "@/data/company";
 import { PageHero } from "@/components/shared/page-hero";
 import { ContactForm } from "@/components/contact/contact-form";
 
@@ -22,7 +22,7 @@ const channels: { label: string; value: string; href?: string; icon: LucideIcon 
     href: contact.whatsapp && `https://wa.me/${contact.whatsapp}`,
     icon: MessageCircle,
   },
-  { label: "Office address", value: contact.address, icon: MapPin },
+  { label: "Office address", value: contact.address || company.location, href: officeLocation.linkUrl, icon: MapPin },
   { label: "Business hours", value: contact.hours, icon: Clock },
 ];
 
@@ -81,35 +81,32 @@ export default function ContactPage() {
               </ul>
             </div>
 
-            {contact.mapEmbedUrl ? (
+            <figure className="overflow-hidden rounded-3xl bg-white ring-1 ring-slate-200">
               <iframe
-                src={contact.mapEmbedUrl}
-                title="ICT BMC office location"
+                src={officeLocation.embedUrl}
+                title="ICT BMC office location map"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                className="aspect-[4/3] w-full rounded-3xl ring-1 ring-slate-200"
+                allowFullScreen
+                className="block aspect-[4/3] w-full border-0 bg-slate-100"
               />
-            ) : (
-              <div
-                role="img"
-                aria-label="Map placeholder — office location to be announced"
-                className="relative flex aspect-[4/3] items-center justify-center overflow-hidden rounded-3xl bg-navy-900 ring-1 ring-slate-200"
-              >
-                <div className="bg-grid-dark absolute inset-0" aria-hidden />
-                <svg viewBox="0 0 400 300" className="absolute inset-0 h-full w-full text-white/10" aria-hidden fill="none">
-                  <path d="M0 210 C 80 180, 140 240, 220 200 S 340 150, 400 170" stroke="currentColor" strokeWidth="10" />
-                  <path d="M120 0 C 140 80, 100 160, 160 300" stroke="currentColor" strokeWidth="6" />
-                  <path d="M300 0 L 260 300" stroke="currentColor" strokeWidth="4" />
-                </svg>
-                <div className="relative text-center">
-                  <span className="mx-auto inline-flex size-12 items-center justify-center rounded-full bg-brand-600 text-white shadow-lg shadow-brand-600/40">
-                    <MapPin className="size-5" aria-hidden />
-                  </span>
-                  <p className="mt-3 text-sm font-medium text-white">Map coming soon</p>
-                  <p className="mt-1 text-xs text-slate-400">Office location will be shown here</p>
-                </div>
-              </div>
-            )}
+              <figcaption className="flex items-center justify-between gap-4 px-5 py-4">
+                <span className="flex items-center gap-2.5 text-sm font-medium text-navy-900">
+                  <MapPin className="size-4 shrink-0 text-brand-600" aria-hidden />
+                  {contact.address || company.location}
+                </span>
+                <a
+                  href={officeLocation.linkUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="focus-ring inline-flex shrink-0 items-center gap-1 rounded text-sm font-medium text-brand-600 hover:text-brand-700"
+                >
+                  Open in Maps
+                  <ArrowUpRight className="size-4" aria-hidden />
+                  <span className="sr-only">(opens in a new tab)</span>
+                </a>
+              </figcaption>
+            </figure>
           </div>
 
           <Suspense fallback={<div className="min-h-[640px] animate-pulse rounded-3xl bg-white ring-1 ring-slate-200" />}>

@@ -1,12 +1,12 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { company, contact, seoKeywords, socialLinks } from "@/data/company";
+import { company, contact, officeLocation, seoKeywords, socialLinks } from "@/data/company";
 import { absoluteUrl } from "@/lib/utils";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { BackToTop } from "@/components/layout/back-to-top";
-import { RevealObserver } from "@/components/shared/reveal-observer";
+import { HashScroll } from "@/components/shared/hash-scroll";
 import { JsonLd } from "@/components/shared/json-ld";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(absoluteUrl("/")),
   title: { default: defaultTitle, template: `%s | ${company.name}` },
   description:
-    "ICT BMC delivers custom software development, business management systems, IT consulting, IT infrastructure and technical support to help businesses in Cambodia grow with confidence.",
+    "ICT BMC, based in Banteay Meanchey Province, delivers custom software development, business management systems, IT consulting, IT infrastructure and technical support to help businesses across Cambodia grow with confidence.",
   keywords: seoKeywords,
   applicationName: company.name,
   openGraph: {
@@ -42,23 +42,35 @@ const organizationLd = {
   url: absoluteUrl("/"),
   slogan: company.tagline,
   description: company.shortDescription,
-  areaServed: company.country,
+  areaServed: [
+    { "@type": "AdministrativeArea", name: `${company.province} Province` },
+    { "@type": "Country", name: company.country },
+  ],
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: officeLocation.plusCode,
+    addressLocality: officeLocation.locality,
+    addressRegion: company.province,
+    addressCountry: company.countryCode,
+  },
+  location: {
+    "@type": "Place",
+    address: contact.address,
+    hasMap: officeLocation.linkUrl,
+    geo: { "@type": "GeoCoordinates", latitude: officeLocation.lat, longitude: officeLocation.lng },
+  },
   ...(contact.email && { email: contact.email }),
   ...(contact.phone && { telephone: contact.phone }),
-  ...(contact.address && { address: contact.address }),
   ...(socialLinks.some((s) => s.href) && { sameAs: socialLinks.filter((s) => s.href).map((s) => s.href) }),
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       data-scroll-behavior="smooth"
-      suppressHydrationWarning
     >
-      <head>
-        {/* Enables scroll-reveal styles only when JS runs, so content is never hidden without it */}
-        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
-      </head>
       <body className="flex min-h-dvh flex-col bg-white font-sans text-ink">
         <a
           href="#main-content"
@@ -72,7 +84,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </main>
         <Footer />
         <BackToTop />
-        <RevealObserver />
+        <HashScroll />
         <JsonLd data={organizationLd} />
       </body>
     </html>
