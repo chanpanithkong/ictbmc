@@ -39,7 +39,7 @@ export default async function ProductsPage() {
           </ButtonLink>
         }
       />
-      <section className="bg-surface py-16 sm:py-20" aria-label={t.catalogAria}>
+      <section className="bg-surface py-14 sm:py-16" aria-label={t.catalogAria}>
         <div className="container-page">
           <ProductExplorer />
         </div>

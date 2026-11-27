@@ -87,7 +87,7 @@ export default async function WebsitesPage() {
       />
 
       {/* Website types */}
-      <section className="bg-white py-24 sm:py-28" aria-labelledby="types-title">
+      <section className="bg-white py-14 sm:py-16" aria-labelledby="types-title">
         <div className="container-page">
           <div data-reveal>
             <SectionHeading
@@ -96,7 +96,7 @@ export default async function WebsitesPage() {
               description={t.typesDescription}
             />
           </div>
-          <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {t.types.map((type, i) => (
               <article
                 key={type.title}
@@ -124,7 +124,7 @@ export default async function WebsitesPage() {
 
       {/* Included in every website */}
       <section
-        className="relative isolate overflow-hidden bg-navy-900 py-24 sm:py-28"
+        className="relative isolate overflow-hidden bg-navy-900 py-14 sm:py-16"
         aria-labelledby="included-title"
       >
         <div className="bg-grid-dark mask-fade-b absolute inset-0 -z-10" aria-hidden />
@@ -139,7 +139,7 @@ export default async function WebsitesPage() {
               description={t.includedDescription}
             />
           </div>
-          <ul className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {t.included.map((item, i) => (
               <li
                 key={item.title}
@@ -157,7 +157,7 @@ export default async function WebsitesPage() {
       </section>
 
       {/* Packages */}
-      <section id="packages" className="scroll-mt-4 bg-surface py-24 sm:py-28" aria-labelledby="packages-title">
+      <section id="packages" className="scroll-mt-4 bg-surface py-14 sm:py-16" aria-labelledby="packages-title">
         <div className="container-page">
           <div data-reveal>
             <SectionHeading
@@ -167,7 +167,7 @@ export default async function WebsitesPage() {
               description={t.packagesDescription}
             />
           </div>
-          <div className="mt-14 grid gap-6 lg:grid-cols-3 lg:items-stretch">
+          <div className="mt-10 grid gap-6 lg:grid-cols-3 lg:items-stretch">
             {t.packages.map((pkg, i) => {
               const featured = i === 1;
               return (
@@ -231,12 +231,12 @@ export default async function WebsitesPage() {
       </section>
 
       {/* Process */}
-      <section className="bg-white py-24 sm:py-28" aria-labelledby="web-process-title">
+      <section className="bg-white py-14 sm:py-16" aria-labelledby="web-process-title">
         <div className="container-page">
           <div data-reveal>
             <SectionHeading eyebrow={t.processEyebrow} title={<span id="web-process-title">{t.processTitle}</span>} />
           </div>
-          <div className="mt-16">
+          <div className="mt-12">
             <ProcessTimeline
               tone="light"
               steps={t.process.map((step, i) => ({ ...step, icon: processIcons[i] }))}
@@ -246,7 +246,7 @@ export default async function WebsitesPage() {
       </section>
 
       {/* FAQ */}
-      <section className="bg-surface py-24 sm:py-28" aria-labelledby="faq-title">
+      <section className="bg-surface py-14 sm:py-16" aria-labelledby="faq-title">
         <div className="container-page grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
           <div data-reveal>
             <SectionHeading eyebrow={t.faqEyebrow} title={<span id="faq-title">{t.faqTitle}</span>} />

@@ -53,7 +53,7 @@ export default async function ConsultingPage() {
         }
       />
 
-      <section className="bg-white py-24 sm:py-28" aria-labelledby="consulting-services-title">
+      <section className="bg-white py-14 sm:py-16" aria-labelledby="consulting-services-title">
         <div className="container-page">
           <div data-reveal>
             <SectionHeading
@@ -62,7 +62,7 @@ export default async function ConsultingPage() {
               description={t.servicesDescription}
             />
           </div>
-          <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {consultingServices.map((c, i) => (
               <div
                 key={c.title}
@@ -80,7 +80,7 @@ export default async function ConsultingPage() {
       </section>
 
       {/* Assessment radar */}
-      <section className="relative overflow-hidden bg-surface py-24 sm:py-28" aria-labelledby="assessment-title">
+      <section className="relative overflow-hidden bg-surface py-14 sm:py-16" aria-labelledby="assessment-title">
         <div aria-hidden className="bg-grid-light mask-radial absolute inset-0" />
         <div className="relative container-page grid items-center gap-12 lg:grid-cols-[1fr_1.15fr]">
           <div data-reveal>
@@ -111,7 +111,7 @@ export default async function ConsultingPage() {
 
       <section
         id="consulting-process"
-        className="relative isolate overflow-hidden bg-navy-900 py-24 sm:py-28"
+        className="relative isolate overflow-hidden bg-navy-900 py-14 sm:py-16"
         aria-labelledby="consulting-process-title"
       >
         <div className="bg-grid-dark mask-fade-b absolute inset-0 -z-10" aria-hidden />
@@ -124,7 +124,7 @@ export default async function ConsultingPage() {
               description={t.processDescription}
             />
           </div>
-          <div className="mt-16">
+          <div className="mt-12">
             <ProcessTimeline steps={getConsultingProcess(locale)} />
           </div>
         </div>

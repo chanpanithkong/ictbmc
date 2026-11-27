@@ -48,7 +48,7 @@ export async function ProductDetail({ product }: { product: Product }) {
       />
 
       {/* 2. Overview */}
-      <section className="bg-white py-20 sm:py-24" aria-labelledby="overview-title">
+      <section className="bg-white py-12 sm:py-14" aria-labelledby="overview-title">
         <div className="container-page grid gap-10 lg:grid-cols-[1fr_1.3fr] lg:items-start">
           <div data-reveal>
             <SectionHeading eyebrow={t.overviewEyebrow} title={<span id="overview-title">{t.overviewTitle}</span>} />
@@ -69,7 +69,7 @@ export async function ProductDetail({ product }: { product: Product }) {
       </section>
 
       {/* 3 & 4. Challenges + solution */}
-      <section className="bg-surface py-20 sm:py-24" aria-label={t.challengesAria}>
+      <section className="bg-surface py-12 sm:py-14" aria-label={t.challengesAria}>
         <div className="container-page grid gap-6 lg:grid-cols-2">
           <div data-reveal className="rounded-3xl bg-white p-8 ring-1 ring-slate-200 sm:p-10">
             <span className="inline-flex size-11 items-center justify-center rounded-xl bg-amber-50 text-amber-600 ring-1 ring-amber-100">
@@ -103,7 +103,7 @@ export async function ProductDetail({ product }: { product: Product }) {
       </section>
 
       {/* 5. Key features */}
-      <section id="features" className="bg-white py-20 sm:py-24" aria-labelledby="features-title">
+      <section id="features" className="bg-white py-12 sm:py-14" aria-labelledby="features-title">
         <div className="container-page">
           <div data-reveal>
             <SectionHeading
@@ -128,7 +128,7 @@ export async function ProductDetail({ product }: { product: Product }) {
       </section>
 
       {/* 6. Benefits */}
-      <section className="bg-surface py-20 sm:py-24" aria-labelledby="benefits-title">
+      <section className="bg-surface py-12 sm:py-14" aria-labelledby="benefits-title">
         <div className="container-page">
           <div data-reveal>
             <SectionHeading
@@ -153,7 +153,7 @@ export async function ProductDetail({ product }: { product: Product }) {
       </section>
 
       {/* 7. UI preview */}
-      <section className="relative isolate overflow-hidden bg-navy-900 py-20 sm:py-24" aria-labelledby="preview-title">
+      <section className="relative isolate overflow-hidden bg-navy-900 py-12 sm:py-14" aria-labelledby="preview-title">
         <div className="bg-grid-dark mask-fade-b absolute inset-0 -z-10" aria-hidden />
         <div className="container-page">
           <div data-reveal>
@@ -165,7 +165,7 @@ export async function ProductDetail({ product }: { product: Product }) {
               description={t.previewDescription}
             />
           </div>
-          <div data-reveal className="relative mx-auto mt-14 max-w-4xl">
+          <div data-reveal className="relative mx-auto mt-10 max-w-4xl">
             <div
               aria-hidden
               className="absolute -inset-10 -z-10 rounded-full bg-gradient-to-tr from-brand-600/30 to-accent-500/20 blur-3xl"
@@ -183,7 +183,7 @@ export async function ProductDetail({ product }: { product: Product }) {
       </section>
 
       {/* 8. Workflow */}
-      <section className="bg-white py-20 sm:py-24" aria-labelledby="workflow-title">
+      <section className="bg-white py-12 sm:py-14" aria-labelledby="workflow-title">
         <div className="container-page">
           <div data-reveal>
             <SectionHeading eyebrow={t.workflowEyebrow} title={<span id="workflow-title">{t.workflowTitle}</span>} />
@@ -222,7 +222,7 @@ export async function ProductDetail({ product }: { product: Product }) {
       />
 
       {/* Related */}
-      <section className="bg-surface py-20 sm:py-24" aria-labelledby="related-title">
+      <section className="bg-surface py-12 sm:py-14" aria-labelledby="related-title">
         <div className="container-page">
           <SectionHeading eyebrow={t.relatedEyebrow} title={<span id="related-title">{t.relatedTitle}</span>} />
           <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">

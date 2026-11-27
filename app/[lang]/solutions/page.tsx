@@ -50,7 +50,7 @@ export default async function SolutionsPage() {
         }
       />
 
-      <section className="bg-white py-24 sm:py-28" aria-label={t.listAria}>
+      <section className="bg-white py-14 sm:py-16" aria-label={t.listAria}>
         <div className="container-page grid gap-6 md:grid-cols-2">
           {solutions.map((s, i) => (
             <article
@@ -81,7 +81,7 @@ export default async function SolutionsPage() {
 
       {/* Transformation journey */}
       <section
-        className="relative isolate overflow-hidden bg-navy-900 py-24 sm:py-28"
+        className="relative isolate overflow-hidden bg-navy-900 py-14 sm:py-16"
         aria-labelledby="journey-title"
       >
         <div className="bg-grid-dark mask-fade-b absolute inset-0 -z-10" aria-hidden />
@@ -98,14 +98,14 @@ export default async function SolutionsPage() {
               description={t.journey.description}
             />
           </div>
-          <div className="mt-16">
+          <div className="mt-12">
             <TransformationJourney t={t.journey} locale={locale} />
           </div>
         </div>
       </section>
 
       {/* Paths */}
-      <section className="bg-surface py-20" aria-label={t.pathsAria}>
+      <section className="border-t border-slate-100 bg-white py-12 sm:py-14" aria-label={t.pathsAria}>
         <div className="container-page grid gap-6 md:grid-cols-2">
           {[
             {

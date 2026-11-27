@@ -11,7 +11,7 @@ export async function ServicesSection() {
   const h = dict.home;
   const services = getServices(locale);
   return (
-    <section className="relative bg-surface py-24 sm:py-28" aria-labelledby="services-title">
+    <section className="relative bg-surface py-14 sm:py-16" aria-labelledby="services-title">
       <div className="container-page">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div data-reveal>
@@ -26,7 +26,7 @@ export async function ServicesSection() {
             <ArrowRight />
           </ButtonLink>
         </div>
-        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((service, i) => (
             <div key={service.slug} data-reveal style={revealDelay(i % 4)}>
               <ServiceCard service={service} index={i} />

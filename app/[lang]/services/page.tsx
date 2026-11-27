@@ -60,15 +60,15 @@ export default async function ServicesPage() {
             key={s.slug}
             id={s.slug}
             aria-labelledby={`${s.slug}-title`}
-            className={cn("scroll-mt-14 py-20 sm:py-24", i % 2 === 1 && "bg-surface")}
+            className={cn("scroll-mt-14 border-b border-slate-100 py-12 last:border-0 sm:py-14", i % 2 === 1 && "bg-surface")}
           >
-            <div className="container-page grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
-              <div data-reveal className={cn(i % 2 === 1 && "lg:order-2")}>
+            <div className="container-page grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:gap-16">
+              <div data-reveal>
                 <div className="flex items-center gap-4">
                   <IconTile icon={s.icon} size="lg" />
                   <span className="font-mono text-sm text-slate-400">{localizeNumber(String(i + 1).padStart(2, "0"), locale)}</span>
                 </div>
-                <h2 id={`${s.slug}-title`} className="mt-6 text-3xl font-semibold tracking-tight text-navy-900">
+                <h2 id={`${s.slug}-title`} className="mt-5 text-2xl font-semibold tracking-tight text-navy-900 sm:text-3xl">
                   {s.title}
                 </h2>
                 <p className="mt-4 text-lg leading-relaxed text-slate-600">{s.description}</p>
@@ -92,17 +92,16 @@ export default async function ServicesPage() {
               </div>
               <div
                 data-reveal
-                className="relative overflow-hidden rounded-3xl bg-navy-900 p-8 sm:p-10"
+                className={cn(
+                  "rounded-2xl p-6 ring-1 sm:p-8",
+                  i % 2 === 1 ? "bg-white ring-slate-200" : "bg-surface ring-slate-200/70",
+                )}
               >
-                <div className="bg-grid-dark mask-radial absolute inset-0" aria-hidden />
-                <div
-                  aria-hidden
-                  className="absolute -right-16 -bottom-16 size-64 rounded-full bg-brand-600/30 blur-3xl"
-                />
-                <div className="relative">
-                  <p className="eyebrow text-accent-400">{t.included}</p>
-                  <CheckList items={s.capabilities} tone="dark" className="mt-6" />
-                </div>
+                <p className="eyebrow text-brand-600">
+                  <span aria-hidden className="h-px w-6 bg-brand-600/50" />
+                  {t.included}
+                </p>
+                <CheckList items={s.capabilities} className="mt-5" />
               </div>
             </div>
           </section>

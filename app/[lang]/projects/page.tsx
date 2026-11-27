@@ -28,7 +28,7 @@ export default async function ProjectsPage() {
         description={t.description}
         breadcrumbs={[{ label: dict.nav.home, href: "/" }, { label: dict.nav.projects }]}
       />
-      <section className="bg-surface py-16 sm:py-20" aria-label={t.portfolioAria}>
+      <section className="bg-surface py-14 sm:py-16" aria-label={t.portfolioAria}>
         <div className="container-page">
           <div
             role="note"

@@ -52,7 +52,7 @@ export default async function AboutPage() {
       />
 
       {/* Who we are */}
-      <section className="bg-white py-24 sm:py-28" aria-labelledby="who-title">
+      <section className="bg-white py-14 sm:py-16" aria-labelledby="who-title">
         <div className="container-page grid gap-14 lg:grid-cols-2 lg:items-center">
           <div data-reveal>
             <SectionHeading eyebrow={t.whoEyebrow} title={<span id="who-title">{t.whoTitle}</span>} />
@@ -81,7 +81,7 @@ export default async function AboutPage() {
       </section>
 
       {/* Mission & vision */}
-      <section className="bg-surface py-24 sm:py-28" aria-label={t.missionVisionAria}>
+      <section className="bg-surface py-14 sm:py-16" aria-label={t.missionVisionAria}>
         <div className="container-page grid gap-6 md:grid-cols-2">
           {[
             { label: t.mission, text: mission, icon: Target },
@@ -108,7 +108,7 @@ export default async function AboutPage() {
       </section>
 
       {/* Core values */}
-      <section className="bg-white py-24 sm:py-28" aria-labelledby="values-title">
+      <section className="bg-white py-14 sm:py-16" aria-labelledby="values-title">
         <div className="container-page">
           <div data-reveal>
             <SectionHeading
@@ -117,7 +117,7 @@ export default async function AboutPage() {
               title={<span id="values-title">{t.valuesTitle}</span>}
             />
           </div>
-          <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {coreValues.map((v, i) => (
               <div
                 key={v.title}
@@ -135,7 +135,7 @@ export default async function AboutPage() {
       </section>
 
       {/* Approach timeline */}
-      <section className="relative isolate overflow-hidden bg-navy-900 py-24 sm:py-28" aria-labelledby="approach-title">
+      <section className="relative isolate overflow-hidden bg-navy-900 py-14 sm:py-16" aria-labelledby="approach-title">
         <div className="bg-grid-dark mask-fade-b absolute inset-0 -z-10" aria-hidden />
         <div className="container-page grid gap-14 lg:grid-cols-[1fr_1.4fr]">
           <div data-reveal className="lg:sticky lg:top-28 lg:self-start">
@@ -168,7 +168,7 @@ export default async function AboutPage() {
       </section>
 
       {/* Why choose us */}
-      <section className="bg-white py-24 sm:py-28" aria-labelledby="why-title">
+      <section className="bg-white py-14 sm:py-16" aria-labelledby="why-title">
         <div className="container-page">
           <div data-reveal>
             <SectionHeading
@@ -177,7 +177,7 @@ export default async function AboutPage() {
               description={t.whyDescription}
             />
           </div>
-          <div className="mt-14 grid gap-px overflow-hidden rounded-2xl bg-slate-200 ring-1 ring-slate-200 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-10 grid gap-px overflow-hidden rounded-2xl bg-slate-200 ring-1 ring-slate-200 sm:grid-cols-2 lg:grid-cols-4">
             {whyChooseUs.map((w, i) => (
               <div key={w.title} data-reveal style={revealDelay(i % 4)} className="bg-white p-6">
                 <p className="font-mono text-xs text-brand-600">{num(i + 1)}</p>

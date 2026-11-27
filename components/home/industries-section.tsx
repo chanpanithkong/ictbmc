@@ -9,7 +9,7 @@ export async function IndustriesSection() {
   const h = dict.home;
   const industries = getIndustries(locale);
   return (
-    <section className="bg-surface py-24 sm:py-28" aria-labelledby="industries-title">
+    <section className="bg-surface py-14 sm:py-16" aria-labelledby="industries-title">
       <div className="container-page">
         <div data-reveal>
           <SectionHeading
@@ -19,7 +19,7 @@ export async function IndustriesSection() {
             description={h.industriesDescription}
           />
         </div>
-        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {industries.map((ind, i) => (
             <div
               key={ind.title}

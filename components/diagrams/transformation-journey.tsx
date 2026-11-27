@@ -7,7 +7,7 @@ type Journey = Dictionary["solutions"]["journey"];
 
 const icons: LucideIcon[] = [FileText, Database, Network, ChartLine];
 /** Desktop stair-step offsets: each stage sits higher than the previous one */
-const lift = ["lg:translate-y-36", "lg:translate-y-24", "lg:translate-y-12", "lg:translate-y-0"];
+const lift = ["lg:translate-y-24", "lg:translate-y-16", "lg:translate-y-8", "lg:translate-y-0"];
 
 /**
  * Four-stage digital transformation figure. On large screens the stages climb
@@ -21,7 +21,7 @@ export function TransformationJourney({ t, locale }: { t: Journey; locale: strin
         viewBox="0 0 1000 320"
         preserveAspectRatio="none"
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-10 hidden h-[320px] w-full lg:block"
+        className="pointer-events-none absolute inset-x-0 top-6 hidden h-[240px] w-full lg:block"
       >
         <defs>
           <linearGradient id="journey-stroke" x1="0" y1="0" x2="1" y2="0">
@@ -59,7 +59,7 @@ export function TransformationJourney({ t, locale }: { t: Journey; locale: strin
         className="absolute top-2 bottom-2 left-6 w-px bg-gradient-to-b from-slate-600 via-brand-500 to-accent-400 lg:hidden"
       />
 
-      <ol className="relative grid gap-6 lg:grid-cols-4 lg:gap-5 lg:pb-36">
+      <ol className="relative grid gap-6 lg:grid-cols-4 lg:gap-5 lg:pb-24">
         {t.stages.map((stage, i) => {
           const Icon = icons[i];
           const last = i === t.stages.length - 1;

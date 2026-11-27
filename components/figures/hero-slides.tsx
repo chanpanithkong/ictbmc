@@ -58,6 +58,7 @@ const showcaseProducts = ["restaurant-management-system", "pos-inventory-managem
 
 /** Hero slideshow for a top-level page */
 export async function PageSlideshow({ page }: { page: HeroPage }) {
+  const compact = page !== "home";
   const { locale, dict } = await getI18n();
   const f = dict.figures;
   const company = getCompany(locale);
@@ -99,7 +100,7 @@ export async function PageSlideshow({ page }: { page: HeroPage }) {
     }));
   }
 
-  return <HeroSlideshow slides={slides} />;
+  return <HeroSlideshow slides={slides} compact={compact} />;
 }
 
 /** Hero slideshow for a product detail page: UI preview, workflow, benefits */
@@ -131,6 +132,6 @@ export async function ProductSlideshow({ product }: { product: Product }) {
       content: <BenefitsFigure t={f} benefits={product.benefits} />,
     },
   ];
-  return <HeroSlideshow slides={slides} />;
+  return <HeroSlideshow slides={slides} compact />;
 }
 

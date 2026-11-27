@@ -7,7 +7,7 @@ export async function PlatformSection() {
   const { dict } = await getI18n();
   const t = dict.home.platform;
   return (
-    <section className="relative overflow-hidden bg-white py-24 sm:py-28" aria-labelledby="platform-title">
+    <section className="relative overflow-hidden bg-white py-14 sm:py-16" aria-labelledby="platform-title">
       <div aria-hidden className="bg-grid-light mask-radial absolute inset-0" />
       <div className="relative container-page grid items-center gap-14 lg:grid-cols-[1fr_1.1fr] lg:gap-10">
         <div data-reveal>

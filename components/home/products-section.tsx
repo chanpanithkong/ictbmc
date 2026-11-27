@@ -17,7 +17,7 @@ export async function ProductsSection() {
   const { locale, dict } = await getI18n();
   const h = dict.home;
   return (
-    <section className="bg-white py-24 sm:py-28" aria-labelledby="products-title">
+    <section className="bg-white py-14 sm:py-16" aria-labelledby="products-title">
       <div className="container-page">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div data-reveal>
@@ -32,7 +32,7 @@ export async function ProductsSection() {
             <ArrowRight />
           </ButtonLink>
         </div>
-        <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {featured.map((slug, i) => (
             <div key={slug} data-reveal style={revealDelay(i)}>
               <ProductCard slug={slug} />

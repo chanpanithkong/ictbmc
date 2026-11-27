@@ -22,7 +22,16 @@ const INTERVAL = 6000;
  * - Arrow keys move between slides; hidden slides are `inert`.
  * Slides are stacked in one grid cell, so the height never jumps.
  */
-export function HeroSlideshow({ slides, className }: { slides: Slide[]; className?: string }) {
+export function HeroSlideshow({
+  slides,
+  className,
+  compact = false,
+}: {
+  slides: Slide[];
+  className?: string;
+  /** Scale illustrations down on large screens so inner-page heroes stay short */
+  compact?: boolean;
+}) {
   const { locale, dict } = useI18n();
   const t = dict.slideshow;
   const [index, setIndex] = useState(0);
@@ -76,7 +85,7 @@ export function HeroSlideshow({ slides, className }: { slides: Slide[]; classNam
       />
 
       {/* slides */}
-      <div className="grid grid-cols-[minmax(0,1fr)]" aria-live={active ? "off" : "polite"}>
+      <div className={cn("grid grid-cols-[minmax(0,1fr)]", compact && "[zoom:0.82] lg:[zoom:0.72]")} aria-live={active ? "off" : "polite"}>
         {slides.map((s, i) => {
           const on = i === index;
           return (
@@ -99,7 +108,7 @@ export function HeroSlideshow({ slides, className }: { slides: Slide[]; classNam
       </div>
 
       {/* caption + controls */}
-      <div className="mt-8 flex items-end justify-between gap-4">
+      <div className={cn("flex items-end justify-between gap-4", compact ? "mt-4" : "mt-6")}>
         <div className="relative min-h-[3.5rem] min-w-0 flex-1">
           {slides.map((s, i) => (
             <div
@@ -148,7 +157,7 @@ export function HeroSlideshow({ slides, className }: { slides: Slide[]; classNam
 
       {/* progress dots */}
       {count > 1 && (
-        <div className="mt-4 flex gap-2">
+        <div className="mt-3 flex gap-2">
           {slides.map((s, i) => (
             <button
               key={s.id}

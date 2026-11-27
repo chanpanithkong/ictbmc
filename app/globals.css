@@ -105,7 +105,7 @@ html:lang(km) {
 }
 :lang(km) :is(h1, h2, h3, h4) {
   letter-spacing: 0;
-  line-height: 1.45;
+  line-height: 1.38;
 }
 :lang(km) .eyebrow {
   letter-spacing: 0.04em;

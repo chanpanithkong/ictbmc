@@ -11,7 +11,7 @@ export async function IntroSection() {
   const h = dict.home;
   const features = h.introFeatures.map((f, i) => ({ ...f, icon: icons[i] }));
   return (
-    <section className="bg-white py-24 sm:py-28" aria-labelledby="intro-title">
+    <section className="bg-white py-14 sm:py-16" aria-labelledby="intro-title">
       <div className="container-page">
         <div className="grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:items-end">
           <div data-reveal>
@@ -25,7 +25,7 @@ export async function IntroSection() {
           </p>
         </div>
 
-        <div className="mt-16 grid gap-px overflow-hidden rounded-2xl bg-slate-200 ring-1 ring-slate-200 md:grid-cols-3">
+        <div className="mt-10 grid gap-px overflow-hidden rounded-2xl bg-slate-200 ring-1 ring-slate-200 md:grid-cols-3">
           {features.map((f, i) => (
             <div key={f.title} data-reveal style={revealDelay(i)} className="group relative bg-white p-8">
               <span

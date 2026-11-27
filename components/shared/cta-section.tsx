@@ -19,7 +19,7 @@ export async function CtaSection({
   primary ??= { label: dict.common.letsTalk, href: "/contact" };
   if (secondary === undefined) secondary = { label: dict.common.exploreSolutions, href: "/solutions" };
   return (
-    <section className="bg-white py-20 sm:py-24">
+    <section className="bg-white py-12 sm:py-14">
       <div className="container-page">
         <div
           data-reveal

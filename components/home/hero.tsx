@@ -7,7 +7,7 @@ export async function Hero() {
   const { dict } = await getI18n();
   const h = dict.home;
   return (
-    <section className="relative isolate overflow-hidden bg-navy-900 pt-32 pb-24 sm:pt-40 lg:pt-44 lg:pb-32">
+    <section className="relative isolate overflow-hidden bg-navy-900 pt-28 pb-16 sm:pt-32 lg:pt-36 lg:pb-20">
       <div className="bg-grid-dark mask-fade-b absolute inset-0 -z-10" aria-hidden />
       <div
         aria-hidden
@@ -24,7 +24,7 @@ export async function Hero() {
             <span className="shrink-0 rounded-full bg-brand-600 px-2 py-0.5 text-xs whitespace-nowrap text-white">ICT</span>
             {h.heroPill}
           </p>
-          <h1 className="mt-7 text-4xl font-semibold tracking-tight text-balance text-white sm:text-5xl lg:text-6xl lg:leading-[1.05]">
+          <h1 className="mt-7 text-4xl font-semibold tracking-tight text-balance text-white sm:text-5xl lg:text-[3.5rem] lg:leading-[1.08]">
             {h.heroTitleA} <span className="text-gradient">{h.heroTitleHighlight}</span> {h.heroTitleB}
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-pretty text-slate-400">
